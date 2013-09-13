@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win32ikkuna", "win32ikkuna.vcxproj", "{643EBED4-9BD7-469B-A1F7-B2A9A7002F17}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "win32build", "win32build.vcxproj", "{643EBED4-9BD7-469B-A1F7-B2A9A7002F17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

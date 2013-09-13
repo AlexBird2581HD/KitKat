@@ -1,6 +1,8 @@
 #include <Engine.h>
 
+#ifdef WINDOWS_FRAMEWORK
 #include <iostream>
+#endif
 
 Engine::Engine()
 {
@@ -39,6 +41,6 @@ void Engine::checkGlError(const char* op)
 {
     for (GLint error = glGetError(); error; error = glGetError())
 	{
-        printf("after %s() glError (0x%x)\n", op, error);
+        //printf("after %s() glError (0x%x)\n", op, error);
     }
 }

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Android">
+      <UniqueIdentifier>{f70889a4-fc79-4d35-bf28-2a9c2d7b47b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{be9c8c91-5d70-477f-89ff-d775a704e2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{00e1e0dc-e476-49da-80af-93d1c3221798}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Common\src\Engine.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\src\Window.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\src\WinMain.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Android\src\gl_code.cpp">
+      <Filter>Android</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\include\Engine.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\include\Window.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\include\Win32toAndroid.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

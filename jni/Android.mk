@@ -18,8 +18,15 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := libKaNot
 LOCAL_CFLAGS    := -Werror
-LOCAL_SRC_FILES :=  gl_code.cpp \
-					Engine.cpp
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Android/include \
+					$(LOCAL_PATH)/../Common/include
+
+# Android specific files
+LOCAL_SRC_FILES :=  ../Android/src/gl_code.cpp
+# Common engine files
+LOCAL_SRC_FILES += ../Common/src/Engine.cpp
+
 LOCAL_LDLIBS    := -llog -lGLESv2
 
 include $(BUILD_SHARED_LIBRARY)

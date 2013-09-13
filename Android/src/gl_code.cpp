@@ -145,10 +145,8 @@ bool setupGraphics(int w, int h) {
 
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
-	int testiarvo = 9001;
-	LOGI("Testi arvo on:%d", testiarvo);
+
 	engine = new Engine();
-	LOGI("Enginen testiluku on:%d",engine->testiluku);
     return true;
 }
 
