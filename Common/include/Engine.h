@@ -2,7 +2,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#ifdef WINDOWS_FRAMEWORK
+#ifdef _WIN32
 #include <OpenGL.h>
 #else
 #include <GLES2/gl2.h>
@@ -21,5 +21,6 @@ private:
 
 	//Debug
 	static void checkGlError(const char* op);
+	static void printGLString(const char *name, GLenum s);
 };
 #endif

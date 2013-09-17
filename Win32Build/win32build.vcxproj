@@ -15,11 +15,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\Common\src\Debug.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
+    <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
     <ClCompile Include="..\Windows\src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
     <ClInclude Include="..\Windows\include\Window.h" />

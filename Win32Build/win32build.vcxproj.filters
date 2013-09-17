@@ -10,30 +10,57 @@
     <Filter Include="Common">
       <UniqueIdentifier>{00e1e0dc-e476-49da-80af-93d1c3221798}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Windows\include">
+      <UniqueIdentifier>{8947d47b-dbb5-4f22-8c64-8f4e4ed949d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\src">
+      <UniqueIdentifier>{d2d5e854-5963-4bf9-a1ac-76ba181963d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\include">
+      <UniqueIdentifier>{e265c19c-5b61-415f-b850-df27abab9efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\src">
+      <UniqueIdentifier>{36ed6594-be07-4488-bc58-ea39bc69758f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Android\include">
+      <UniqueIdentifier>{3774dd61-e769-472e-9fe5-9445b7412d77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Android\src">
+      <UniqueIdentifier>{87f28355-61fa-4ac2-b765-9102aacfc84e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Common\src\Engine.cpp">
-      <Filter>Common</Filter>
+    <ClCompile Include="..\Windows\src\OpenGL.cpp">
+      <Filter>Windows\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Windows\src\Window.cpp">
-      <Filter>Windows</Filter>
+      <Filter>Windows\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Windows\src\WinMain.cpp">
-      <Filter>Windows</Filter>
+      <Filter>Windows\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\Engine.cpp">
+      <Filter>Common\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Android\src\gl_code.cpp">
-      <Filter>Android</Filter>
+      <Filter>Android\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\Debug.cpp">
+      <Filter>Common\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\include\Engine.h">
-      <Filter>Common</Filter>
+    <ClInclude Include="..\Windows\include\Win32toAndroid.h">
+      <Filter>Windows\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Windows\include\Window.h">
-      <Filter>Windows</Filter>
+      <Filter>Windows\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Windows\include\Win32toAndroid.h">
-      <Filter>Windows</Filter>
+    <ClInclude Include="..\Common\include\Engine.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\Debug.h">
+      <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
