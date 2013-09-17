@@ -6,15 +6,12 @@
 void printDebug(bool error, const char* message)
 {
 	if(error == true)
-	{
 		OutputDebugStringA("Error: ");
-		OutputDebugStringA(message);
-	}
+
 	else
-	{
 		OutputDebugStringA("Info: ");
-		OutputDebugStringA(message);
-	}
+
+	OutputDebugStringA(message);
 	OutputDebugStringA("\n");
 }
 
