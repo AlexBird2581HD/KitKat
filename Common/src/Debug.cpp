@@ -26,7 +26,7 @@ void printGLString(const char *name, GLenum s)
 		const char *v = (const char *) glGetString(s);
 	#ifdef _WIN32 // Windows implementation
 		char message[255];
-		sprintf_s(message, "GL %s = %s\n", name, v);
+		sprintf(message, "GL %s = %s\n", name, v);
 		LOGI(message);
 	#else // Android implementation
 		LOGI("GL %s = %s\n", name, v);
@@ -42,7 +42,7 @@ void checkGlError(const char* op)
 		{
 	#ifdef _WIN32 // Windows implementation
 			char message[255];
-			sprintf_s(message, "after %s() glError (0x%x)\n", op, error);
+			sprintf(message, "after %s() glError (0x%x)\n", op, error);
 			LOGE(message);
 	#else // Android implementation
 			LOGI("after %s() glError (0x%x)\n", op, error);

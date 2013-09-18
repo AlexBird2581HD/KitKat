@@ -16,8 +16,14 @@ public:
 	~Engine();
 	void Update();
 	void Draw();
-	void Init();
+	void Init(int w, int h);
 private:
+	GLuint loadShader(GLenum shaderType, const char* pSource);
+	GLuint createProgram(const char* pVertexSource, const char* pFragmentSource);
+	bool setupGraphics(int w, int h);
 	void clear();
+
+	GLuint gProgram;
+	GLuint gvPositionHandle;
 };
 #endif
