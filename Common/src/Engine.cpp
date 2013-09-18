@@ -1,6 +1,5 @@
 #include <Engine.h>
 #include <Debug.h>
-#include <iostream>
 
 Engine::Engine()
 {
@@ -31,25 +30,4 @@ void Engine::clear()
 {    
     glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     checkGlError("glClear");
-}
-
-// Static
-void Engine::printGLString(const char *name, GLenum s)
-{
-    const char *v = (const char *) glGetString(s);
-
-	char message[255];
-	sprintf(message, "GL %s = %s\n", name, v);
-	LOGI(message);
-
-}
-
-void Engine::checkGlError(const char* op)
-{
-    for (GLint error = glGetError(); error; error = glGetError())
-	{
-		char message[255];
-		sprintf(message, "after %s() glError (0x%x)\n", op, error);
-		LOGE(message);
-    }
 }

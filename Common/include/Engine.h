@@ -16,11 +16,8 @@ public:
 	~Engine();
 	void Update();
 	void Draw();
+	void Init();
 private:
 	void clear();
-
-	//Debug
-	static void checkGlError(const char* op);
-	static void printGLString(const char *name, GLenum s);
 };
 #endif
