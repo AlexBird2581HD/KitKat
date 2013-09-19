@@ -92,7 +92,8 @@ Window::Window(HINSTANCE instance,const char* windowName,int width,int height)
 	}
 	
 	LoadOpenGLFunctions(); // Loads OpenGL 2.1 functions
-	glViewport(0, 0, width, height); // Sets up the OpenGL viewport
+	//glViewport(0, 0, width, height); // Sets up the OpenGL viewport
+	// Handled by engine->Init
 
 	MSG msg ={};
 	Engine* engine = new Engine();

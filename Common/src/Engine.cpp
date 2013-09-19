@@ -28,7 +28,15 @@ void Engine::Draw()
 {
 	clear(); // Clears the screen for next draw
 
-    glVertexAttribPointer(gvPositionHandle, 2, GL_FLOAT, GL_FALSE, 0, gTriangleVertices);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Make VBO active
+    checkGlError("glBindBuffer");
+	glBufferData(GL_ARRAY_BUFFER, sizeof(gTriangleVertices), gTriangleVertices, GL_DYNAMIC_DRAW);
+    checkGlError("glBufferData");
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Data has changed
+    checkGlError("glBindBuffer");
+
+	// Draw the stuff from the VBO(Position, Size, Type, Normal, Size of one point(x+y), pointer to array(comes from VBO)
+	glVertexAttribPointer(gvPositionHandle, 2, GL_FLOAT, GL_FALSE, 2*sizeof(GL_FLOAT), NULL);
     checkGlError("glVertexAttribPointer");
     glEnableVertexAttribArray(gvPositionHandle);
     checkGlError("glEnableVertexAttribArray");
@@ -62,7 +70,7 @@ GLuint Engine::loadShader(GLenum shaderType, const char* pSource)
                 char* buf = (char*) malloc(infoLen);
                 if (buf) {
                     glGetShaderInfoLog(shader, infoLen, NULL, buf);
-                    //LOGE("Could not compile shader %d:\n%s\n", shaderType, buf);
+                    LOGE("Could not compile shader %d:\n%s\n", shaderType, buf);
                     free(buf);
                 }
                 glDeleteShader(shader);
@@ -102,7 +110,7 @@ GLuint Engine::createProgram(const char* pVertexSource, const char* pFragmentSou
                 char* buf = (char*) malloc(bufLength);
                 if (buf) {
                     glGetProgramInfoLog(program, bufLength, NULL, buf);
-                    //LOGE("Could not link program:\n%s\n", buf);
+                    LOGE("Could not link program:\n%s\n", buf);
                     free(buf);
                 }
             }
@@ -131,9 +139,9 @@ bool Engine::setupGraphics(int w, int h)
     printGLString("Version", GL_VERSION);
     printGLString("Vendor", GL_VENDOR);
     printGLString("Renderer", GL_RENDERER);
-//    printGLString("Extensions", GL_EXTENSIONS);
+    printGLString("Extensions", GL_EXTENSIONS);
 
-    //LOGI("setupGraphics(%d, %d)", w, h);
+    LOGI("setupGraphics(%d, %d)", w, h);
     gProgram = createProgram(gVertexShader, gFragmentShader);
     if (!gProgram) {
         LOGE("Could not create program.");
@@ -141,13 +149,16 @@ bool Engine::setupGraphics(int w, int h)
     }
     gvPositionHandle = glGetAttribLocation(gProgram, "vPosition");
     checkGlError("glGetAttribLocation");
-    //LOGI("glGetAttribLocation(\"vPosition\") = %d\n", gvPositionHandle);
+    LOGI("glGetAttribLocation(\"vPosition\") = %d\n", gvPositionHandle);
 
     glViewport(0, 0, w, h);
     checkGlError("glViewport");
 
 	glUseProgram(gProgram);
     checkGlError("glUseProgram");
+
+	glGenBuffers(1, &VBO); // Create the VBO
+	checkGlError("glGenBuffers");
     return true;
 }
 

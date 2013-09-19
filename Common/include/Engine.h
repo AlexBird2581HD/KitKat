@@ -25,5 +25,6 @@ private:
 
 	GLuint gProgram;
 	GLuint gvPositionHandle;
+	GLuint VBO; // Vertex Buffer Object
 };
 #endif
