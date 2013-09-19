@@ -17,6 +17,7 @@
     </ClCompile>
     <ClCompile Include="..\Common\src\Debug.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
+    <ClCompile Include="..\Common\src\Graphics.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
     <ClCompile Include="..\Windows\src\WinMain.cpp" />
@@ -24,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
+    <ClInclude Include="..\Common\include\Graphics.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
     <ClInclude Include="..\Windows\include\Window.h" />
   </ItemGroup>

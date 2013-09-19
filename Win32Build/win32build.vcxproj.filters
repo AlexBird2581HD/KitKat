@@ -48,6 +48,9 @@
     <ClCompile Include="..\Common\src\Debug.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\src\Graphics.cpp">
+      <Filter>Common\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -60,6 +63,9 @@
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\Debug.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\Graphics.h">
       <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>

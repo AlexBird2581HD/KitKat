@@ -26,7 +26,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Android/include \
 LOCAL_SRC_FILES :=  ../Android/src/gl_code.cpp
 # Common engine files
 LOCAL_SRC_FILES += 	../Common/src/Engine.cpp \
-					../Common/src/Debug.cpp
+					../Common/src/Debug.cpp \
+					../Common/src/Graphics.cpp
 
 LOCAL_LDLIBS    := -llog -lGLESv2
 
