@@ -75,7 +75,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>C:\Users\tti12smatiask\Desktop\AndroidTools\cygwin\cygwin.bat</Command>
+      <Command>$(SolutionDir)..\..\cygwin\cygwin.bat</Command>
       <Message>Build android binaries</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -97,7 +97,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>C:\Users\tti12smatiask\Desktop\AndroidTools\cygwin\cygwin.bat</Command>
+      <Command>$(SolutionDir)..\..\cygwin\cygwin.bat</Command>
       <Message>Build android binaries</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
