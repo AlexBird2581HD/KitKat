@@ -8,7 +8,7 @@
 #define  LOGI(...)  printDebug(false, __VA_ARGS__) // Info
 #define  LOGE(...)  printDebug(true, __VA_ARGS__) // Error
 
-void printDebug(bool error, const char* message); // Function to print the log
+void printDebug(bool error, const char* format, ...); // Function to print the log
 
 #else // Android functions
 #include <android/log.h>
