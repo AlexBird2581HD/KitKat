@@ -51,6 +51,9 @@
     <ClCompile Include="..\Common\src\Graphics.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
+    <ClCompile Include="Mathlibrary.cpp">
+      <Filter>Windows\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="..\Common\include\Graphics.h">
       <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathlibrary.h">
+      <Filter>Windows\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
