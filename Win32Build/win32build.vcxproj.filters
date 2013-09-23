@@ -51,6 +51,12 @@
     <ClCompile Include="..\Common\src\Graphics.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Android\src\Util_android.cpp">
+      <Filter>Android\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\src\Util_win32.cpp">
+      <Filter>Windows\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -66,6 +72,9 @@
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\Graphics.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\Util.h">
       <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>

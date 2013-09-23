@@ -8,6 +8,8 @@
 #include <GLES2/gl2ext.h>
 #endif
 
+#include <Util.h>
+
 class Graphics
 {
 public:
