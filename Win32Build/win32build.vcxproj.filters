@@ -60,6 +60,9 @@
     <ClCompile Include="..\Common\src\Mathlibrary.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\src\Shader.cpp">
+      <Filter>Common\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -81,6 +84,9 @@
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\Mathlibrary.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\Shader.h">
       <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,7 +17,7 @@ std::string Util::ReadFile(std::string fileName)
 	{
 		while(std::getline(file,line))
 		{
-			content.append(line + "\n");
+			content.append(line);
 		}
 	}
 	return content;

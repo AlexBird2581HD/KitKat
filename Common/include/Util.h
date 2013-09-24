@@ -6,6 +6,9 @@
 class Util
 {
 public:
+	/*
+	 * Returns the contents of a text file as a string
+	 */
 	static std::string ReadFile(std::string fileName);
 private:
 	Util(const Util& util);
