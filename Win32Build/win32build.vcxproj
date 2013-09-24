@@ -21,20 +21,20 @@
     <ClCompile Include="..\Common\src\Debug.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
     <ClCompile Include="..\Common\src\Graphics.cpp" />
+    <ClCompile Include="..\Common\src\Mathlibrary.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\Util_win32.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
     <ClCompile Include="..\Windows\src\WinMain.cpp" />
-    <ClCompile Include="Mathlibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
     <ClInclude Include="..\Common\include\Graphics.h" />
+    <ClInclude Include="..\Common\include\Mathlibrary.h" />
     <ClInclude Include="..\Common\include\Util.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
     <ClInclude Include="..\Windows\include\Window.h" />
-    <ClInclude Include="Mathlibrary.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{643EBED4-9BD7-469B-A1F7-B2A9A7002F17}</ProjectGuid>
