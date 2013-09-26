@@ -54,16 +54,17 @@ void Shader::use()
 
 std::string Shader::readFile(const std::string fileName)
 {
+	std::string path = "../assets/" + fileName;
 	std::string content;
 	std::fstream file;
-	file.open(fileName.c_str(), std::ios::in);
+	file.open(path, std::ios::in);
 	// Android needs the .c_str() to compile
 
 	if(file.is_open())
 	{
 		std::string line;
 		while(std::getline(file, line))
-			content += line;
+			content += line + "\n";
 	}
 	
 	return content;
@@ -98,6 +99,7 @@ void Shader::createProgram()
 void Shader::linkProgram()
 {
 	glLinkProgram(_program);
+	checkGlError("glLinkProgram");
 }
 
 GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
@@ -117,6 +119,7 @@ void Shader::compileShader(const GLuint shader, const char* code)
 	// Takes one string(second parameter)
 	// and assumes strings are null terminated(last parameter)
 	glShaderSource(shader, 1, &code, NULL);
+	checkGlError("glShaderSource");
 	glCompileShader(shader);
 	checkGlError("glCompileShader");
 
