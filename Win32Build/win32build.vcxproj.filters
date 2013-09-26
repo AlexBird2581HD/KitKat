@@ -51,17 +51,17 @@
     <ClCompile Include="..\Common\src\Graphics.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Android\src\Util_android.cpp">
-      <Filter>Android\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Windows\src\Util_win32.cpp">
-      <Filter>Windows\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\src\Mathlibrary.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\src\Shader.cpp">
       <Filter>Common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\src\FileReader.cpp">
+      <Filter>Windows\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Android\src\FileReader.cpp">
+      <Filter>Android\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,14 +80,17 @@
     <ClInclude Include="..\Common\include\Graphics.h">
       <Filter>Common\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\include\Util.h">
-      <Filter>Common\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\include\Mathlibrary.h">
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\Shader.h">
       <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Android\include\FileReader.h">
+      <Filter>Android\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\include\FileReader.h">
+      <Filter>Windows\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

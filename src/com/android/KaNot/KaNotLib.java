@@ -15,7 +15,7 @@
  */
 
 package com.android.KaNot;
-
+import android.content.res.AssetManager;
 // Wrapper for native library
 
 public class KaNotLib {
@@ -29,5 +29,6 @@ public class KaNotLib {
      * @param height the current view height
      */
      public static native void init(int width, int height);
+     public static native void GetManager(AssetManager assetManager);
      public static native void step();
 }

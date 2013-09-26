@@ -96,7 +96,7 @@ Window::Window(HINSTANCE instance,const char* windowName,int width,int height)
 	// Handled by engine->Init
 
 	MSG msg ={};
-	Engine* engine = new Engine();
+	KitKat::Engine* engine = new KitKat::Engine();
 	engine->Init(width, height);
 	// Main message loop:
 	while(msg.message != WM_QUIT)

@@ -25,6 +25,10 @@
 #include <Engine.h>
 #include <Debug.h>
 
+#include <FileReader.h>
+
+using namespace KitKat;
+
 Engine* engine = new Engine();
 
 void renderFrame() {
@@ -36,6 +40,7 @@ extern "C" {
 							//Java kakkaa, hyi. Activity_Library_function
     JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_init(JNIEnv * env, jobject obj,  jint width, jint height);
     JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_step(JNIEnv * env, jobject obj);
+	JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_GetManager(JNIEnv* env, jclass clazz, jobject assetManager);
 };
 
 JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_init(JNIEnv * env, jobject obj,  jint width, jint height)
@@ -47,4 +52,10 @@ JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_init(JNIEnv * env, jobjec
 JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_step(JNIEnv * env, jobject obj)
 {
     renderFrame();
+}
+
+JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_GetManager(JNIEnv* env, jclass clazz, jobject assetManager)
+{
+    AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
+	FileReader::mgr = mgr;
 }

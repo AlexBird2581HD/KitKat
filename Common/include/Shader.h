@@ -20,11 +20,18 @@ namespace KitKat
 
 		GLuint program();
 
+		GLint getAttribLocation(const std::string& name);
+		GLint getUniformLocation(const std::string& name);
+		// void setUniform(const std::string& name, matrix4);
+		//TODO: implement matrix4
+
 		void use();
 
 	private:
 		GLuint _program;
 		GLuint _vertexShader, _fragmentShader;
+
+		std::string readFile(const std::string fileName);
 
 		void create(const std::string& vertexCode, const std::string& fragmentCode);
 		void destroy();

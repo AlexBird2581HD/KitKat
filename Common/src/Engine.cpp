@@ -1,6 +1,8 @@
 #include <Engine.h>
 #include <vector>
 
+using namespace KitKat;
+
 Engine::Engine()
 	: graphics(0)
 {

@@ -181,3 +181,4 @@ proguard/
 *.iws
 .idea/
 ######## END OF ANDROID IGNORES ##########
+lint.xml

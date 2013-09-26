@@ -8,25 +8,25 @@
 #include <GLES2/gl2ext.h>
 #endif
 
-#include <Util.h>
+#include <Shader.h>
 
-class Graphics
+namespace KitKat
 {
-public:
-	Graphics();
-	~Graphics();
-	bool Init(int width, int height);
-	void Draw();	
-private:
-	bool setupGraphics(int w, int h);
-	void clear();
-	void bindVertices();
-	GLuint loadShader(GLenum shaderType, const char* pSource);
-	GLuint createProgram(const char* pVertexSource, const char* pFragmentSource);	
+	class Graphics
+	{
+	public:
+		Graphics();
+		~Graphics();
+		bool Init(int width, int height);
+		void Draw();	
+	private:
+		Shader* _shader;
+		GLuint gvPositionHandle;
+		GLuint VBO; // Vertex Buffer Object
 
-	GLuint gProgram;
-	GLuint gvPositionHandle;
-	GLuint VBO; // Vertex Buffer Object
-};
-
+		bool setupGraphics(int w, int h);
+		void clear();
+		void bindVertices();
+	};
+}
 #endif

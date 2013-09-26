@@ -1,6 +1,7 @@
 #include <Shader.h>
-#include <Util.h>
 #include <Debug.h>
+
+#include <fstream>
 #include <cassert>
 
 using namespace KitKat;
@@ -12,8 +13,8 @@ Shader::Shader(const std::string& vertex, const std::string& fragment, bool load
 		create(vertex, fragment);
 		return;
 	}
-	std::string vertexCode = Util::ReadFile(vertex);
-	std::string fragmentCode = Util::ReadFile(fragment);
+	std::string vertexCode = readFile(vertex);
+	std::string fragmentCode = readFile(fragment);
 
 	create(vertexCode, fragmentCode);
 }
@@ -29,12 +30,44 @@ GLuint Shader::program()
 	return _program;
 }
 
+GLint Shader::getAttribLocation(const std::string& name)
+{
+	GLint location = glGetAttribLocation(_program, name.c_str());
+	checkGlError("glGetAttribLocation");
+	return location;
+}
+
+GLint Shader::getUniformLocation(const std::string& name)
+{
+	GLint location = glGetUniformLocation(_program, name.c_str());
+	checkGlError("glGetUniformLocation");
+	return location;
+}
+
 void Shader::use()
 {
-
+	glUseProgram(_program);
+	checkGlError("glUseProgram");
 }
 
 // Private
+
+std::string Shader::readFile(const std::string fileName)
+{
+	std::string content;
+	std::fstream file;
+	file.open(fileName.c_str(), std::ios::in);
+	// Android needs the .c_str() to compile
+
+	if(file.is_open())
+	{
+		std::string line;
+		while(std::getline(file, line))
+			content += line;
+	}
+	
+	return content;
+}
 
 void Shader::create(const std::string& vertexCode, const std::string& fragmentCode)
 {

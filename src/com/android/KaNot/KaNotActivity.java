@@ -23,12 +23,21 @@ import android.view.WindowManager;
 
 import java.io.File;
 
+import android.content.res.AssetManager;
 
 public class KaNotActivity extends Activity {
 
     KaNotView mView;
-
+    AssetManager assetManager;
+    
+    static 
+	{
+         System.loadLibrary("KaNot");
+	}
+    
     @Override protected void onCreate(Bundle icicle) {
+    	assetManager = getAssets();
+    	KaNotLib.GetManager(assetManager);
         super.onCreate(icicle);
         mView = new KaNotView(getApplication());
 	setContentView(mView);

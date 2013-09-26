@@ -3,16 +3,18 @@
 #define ENGINE_H
 
 #include <Graphics.h>
-
-class Engine
+namespace KitKat
 {
-public:
-	Engine();
-	~Engine();
-	void Update();
-	void Draw();
-	bool Init(int width, int height);
-private:
-	Graphics* graphics;
-};
+	class Engine
+	{
+	public:
+		Engine();
+		~Engine();
+		void Update();
+		void Draw();
+		bool Init(int width, int height);
+	private:
+		Graphics* graphics;
+	};
+}
 #endif
