@@ -13,9 +13,9 @@ Shader::Shader(const std::string& vertex, const std::string& fragment, bool load
 		create(vertex, fragment);
 		return;
 	}
+
 	std::string vertexCode = readFile(vertex);
 	std::string fragmentCode = readFile(fragment);
-
 	create(vertexCode, fragmentCode);
 }
 
@@ -57,19 +57,29 @@ void Shader::use()
 
 std::string Shader::readFile(const std::string fileName)
 {
-	std::string path = "../assets/" + fileName;
 	std::string content;
-	std::fstream file;
-	file.open(path.c_str(), std::ios::in);
-	// Android needs the .c_str() to compile
 
-	if(file.is_open())
+	FileReader fr(fileName.c_str());
+
+	// Get file size hack
+	char test[1];
+	int length = 0;
+	while(fr.ReadBytes(1,test))
 	{
-		std::string line;
-		while(std::getline(file, line))
-			content += line + "\n";
+		fr.FileSeek(length, SEEK_SET);
+		++length;
 	}
-	
+	--length; // Length will be 1 too long
+	// End of filesize hack
+
+	// Read the content
+	fr.FileSeek(0, SEEK_SET);
+	char* buffer = new char[length];
+	fr.ReadBytes(length,buffer);
+	buffer[length] = 0;
+
+	content = buffer;
+
 	return content;
 }
 

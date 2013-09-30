@@ -5,7 +5,7 @@ using namespace KitKat;
 
 FileReader::FileReader(const char* path)
 {
-	filePath = std::string("Assets\\");
+	filePath = std::string("..\\Assets\\");
 	filePath += path;
 	file = fopen(filePath.c_str(),"rb");
 }
@@ -17,7 +17,7 @@ FileReader::~FileReader()
 
 bool FileReader::FileSeek(int offset,int relation)
 {
-	if(fseek(file,offset,relation)!=1)
+	if(fseek(file,offset,relation) == 0)
 		return true;
 	return false;
 }

@@ -9,6 +9,7 @@
 #endif
 
 #include <string>
+#include <FileReader.h>
 
 namespace KitKat
 {
