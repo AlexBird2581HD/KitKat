@@ -2,7 +2,7 @@
 
 using namespace KitKat;
 
-//AAssetManager* FileReader::mgr = NULL;
+AAssetManager* FileReader::mgr = NULL;
 
 FileReader::FileReader(const char* path)
 {

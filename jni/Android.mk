@@ -32,6 +32,6 @@ LOCAL_SRC_FILES += 	../Common/src/Engine.cpp \
 					../Common/src/Shader.cpp \
 					../Common/src/Mathlibrary.cpp
 
-LOCAL_LDLIBS    := -llog -lGLESv2
+LOCAL_LDLIBS    := -llog -lGLESv2 -landroid
 
 include $(BUILD_SHARED_LIBRARY)

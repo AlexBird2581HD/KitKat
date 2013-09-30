@@ -60,7 +60,7 @@ std::string Shader::readFile(const std::string fileName)
 	std::string path = "../assets/" + fileName;
 	std::string content;
 	std::fstream file;
-	file.open(path, std::ios::in);
+	file.open(path.c_str(), std::ios::in);
 	// Android needs the .c_str() to compile
 
 	if(file.is_open())
@@ -108,7 +108,7 @@ void Shader::linkProgram()
 	{
 		char log[1024];
 		glGetProgramInfoLog(_program, 1024, 0, log);
-		LOGE(log);
+		LOGE("%s", log); // Stupid android
 	}
 }
 
@@ -139,7 +139,7 @@ void Shader::compileShader(const GLuint shader, const char* code)
 		LOGE("Shader compilation failed");
 		char log[1024];
 		glGetShaderInfoLog(shader, 1024, 0, log);
-		LOGE(log);
+		LOGE("%s", log); // Again, stupid android
 		destroy(); // Remove everything just in case
 		assert(false);
 	}
