@@ -18,10 +18,12 @@ Shader::Shader(const std::string& vertex, const std::string& fragment, bool load
 
 	create(vertexCode, fragmentCode);
 }
+
 Shader::~Shader()
 {
 	destroy();
 }
+
 
 // Public
 
@@ -50,6 +52,7 @@ void Shader::use()
 	checkGlError("glUseProgram");
 }
 
+
 // Private
 
 std::string Shader::readFile(const std::string fileName)
@@ -75,7 +78,7 @@ void Shader::create(const std::string& vertexCode, const std::string& fragmentCo
 	createProgram();
 
 	_vertexShader = createShader(GL_VERTEX_SHADER, vertexCode);
-	_fragmentShader = createShader(GL_VERTEX_SHADER, fragmentCode);
+	_fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentCode);
 
 	linkProgram();
 }
@@ -99,7 +102,14 @@ void Shader::createProgram()
 void Shader::linkProgram()
 {
 	glLinkProgram(_program);
-	checkGlError("glLinkProgram");
+	GLint link = 0;
+	glGetShaderiv(_program, GL_LINK_STATUS, &link);
+	if(link == GL_FALSE)
+	{
+		char log[1024];
+		glGetProgramInfoLog(_program, 1024, 0, log);
+		LOGE(log);
+	}
 }
 
 GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
@@ -111,8 +121,6 @@ GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
 	
 	return shader;
 }
-
-
 
 void Shader::compileShader(const GLuint shader, const char* code)
 {
@@ -129,6 +137,9 @@ void Shader::compileShader(const GLuint shader, const char* code)
 	if(compiled == GL_FALSE)
 	{
 		LOGE("Shader compilation failed");
+		char log[1024];
+		glGetShaderInfoLog(shader, 1024, 0, log);
+		LOGE(log);
 		destroy(); // Remove everything just in case
 		assert(false);
 	}
