@@ -1,5 +1,6 @@
 #include <Shader.h>
 #include <Debug.h>
+#include <FileReader.h>
 
 #include <fstream>
 #include <cassert>
@@ -14,8 +15,11 @@ Shader::Shader(const std::string& vertex, const std::string& fragment, bool load
 		return;
 	}
 
-	std::string vertexCode = readFile(vertex);
-	std::string fragmentCode = readFile(fragment);
+	FileReader vertexFile(vertex.c_str());
+	FileReader fragmentFile(fragment.c_str());
+
+	std::string vertexCode = vertexFile.ReadFile();
+	std::string fragmentCode = fragmentFile.ReadFile();
 	create(vertexCode, fragmentCode);
 }
 

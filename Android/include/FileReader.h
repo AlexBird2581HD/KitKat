@@ -14,10 +14,12 @@ namespace KitKat
 		FileReader(const char* path);
 		 ~FileReader();
 
-		 void LoadFile(const char* name);
+		 int GetFileSize();
+		 // Still probably might want to use file headers if possible
 
-		 bool ReadBytes(unsigned int count,void*buffer);
 		 bool FileSeek(int offset,int relation);
+		 bool ReadBytes(unsigned int count,void*buffer);		 
+		 std::string ReadFile(); // Reads the whole file and returns as string
 		 
 		 static AAssetManager* mgr;
 	private:

@@ -9,7 +9,6 @@
 #endif
 
 #include <string>
-#include <FileReader.h>
 
 namespace KitKat
 {
@@ -23,7 +22,7 @@ namespace KitKat
 
 		GLint getAttribLocation(const std::string& name);
 		GLint getUniformLocation(const std::string& name);
-		// void setUniform(const std::string& name, matrix4);
+		//void setUniform(const std::string& name, matrix4);
 		//TODO: implement matrix4
 
 		void use();
