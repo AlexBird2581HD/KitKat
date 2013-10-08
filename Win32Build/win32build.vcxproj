@@ -21,8 +21,9 @@
     <ClCompile Include="..\Common\src\Debug.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
     <ClCompile Include="..\Common\src\Graphics.cpp" />
-    <ClCompile Include="..\Common\src\Mathlibrary.cpp" />
+    <ClCompile Include="..\Common\src\Rectangle.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
+    <ClCompile Include="..\Common\src\Vector2.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\FileReader.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
@@ -33,7 +34,9 @@
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
     <ClInclude Include="..\Common\include\Graphics.h" />
-    <ClInclude Include="..\Common\include\Mathlibrary.h" />
+    <ClInclude Include="..\Common\include\KitKatMath\Rectangle.h" />
+    <ClInclude Include="..\Common\include\KitKatMath\Util.h" />
+    <ClInclude Include="..\Common\include\KitKatMath\Vector2.h" />
     <ClInclude Include="..\Common\include\Shader.h" />
     <ClInclude Include="..\Windows\include\FileReader.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
