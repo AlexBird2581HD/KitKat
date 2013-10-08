@@ -45,6 +45,7 @@ bool Graphics::setupGraphics(int width, int height)
 	LOGI("setupGraphics(%d, %d)", width, height);
 
 	_shader = new Shader("vertexshader.vert", "fragmentshader.frag");
+	checkGlError("Shader");
 
     glViewport(0, 0, width, height);
     checkGlError("glViewport");

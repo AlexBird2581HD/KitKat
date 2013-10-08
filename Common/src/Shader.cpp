@@ -59,42 +59,16 @@ void Shader::use()
 
 // Private
 
-std::string Shader::readFile(const std::string fileName)
-{
-	std::string content;
-
-	FileReader fr(fileName.c_str());
-
-	// Get file size hack
-	char test[1];
-	int length = 0;
-	while(fr.ReadBytes(1,test))
-	{
-		fr.FileSeek(length, SEEK_SET);
-		++length;
-	}
-	--length; // Length will be 1 too long
-	// End of filesize hack
-
-	// Read the content
-	fr.FileSeek(0, SEEK_SET);
-	char* buffer = new char[length];
-	fr.ReadBytes(length,buffer);
-	buffer[length] = 0;
-
-	content = buffer;
-
-	return content;
-}
-
 void Shader::create(const std::string& vertexCode, const std::string& fragmentCode)
 {
 	createProgram();
+	checkGlError("createProgram");
 
 	_vertexShader = createShader(GL_VERTEX_SHADER, vertexCode);
 	_fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentCode);
 
 	linkProgram();
+	checkGlError("linkProgram");
 }
 
 void Shader::destroy()
@@ -116,14 +90,19 @@ void Shader::createProgram()
 void Shader::linkProgram()
 {
 	glLinkProgram(_program);
+	checkGlError("glLinkProgram");
+
 	GLint link = 0;
-	glGetShaderiv(_program, GL_LINK_STATUS, &link);
+	glGetProgramiv(_program, GL_LINK_STATUS, &link);
+	checkGlError("glGetProgramiv_link");
 	if(link == GL_FALSE)
 	{
 		char log[1024];
 		glGetProgramInfoLog(_program, 1024, 0, log);
+		checkGlError("glGetProgramInfoLog_link");
 		LOGE("%s", log); // Stupid android
 	}
+	checkGlError("linkkaus");
 }
 
 GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
@@ -131,7 +110,9 @@ GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
 	GLuint shader = glCreateShader(shaderType);
 
 	compileShader(shader, code.c_str());
+	checkGlError("compileShader");
 	attachShader(shader);
+	checkGlError("attachShader");
 	
 	return shader;
 }
@@ -147,6 +128,8 @@ void Shader::compileShader(const GLuint shader, const char* code)
 
 	GLint compiled = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+	checkGlError("glGetShaderiv");
+
 
 	if(compiled == GL_FALSE)
 	{
@@ -154,7 +137,7 @@ void Shader::compileShader(const GLuint shader, const char* code)
 		char log[1024];
 		glGetShaderInfoLog(shader, 1024, 0, log);
 		LOGE("%s", log); // Again, stupid android
-		destroy(); // Remove everything just in case
+		//destroy(); // Remove everything just in case
 		assert(false);
 	}
 }
