@@ -25,12 +25,15 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Android/include \
 # Android specific files
 LOCAL_SRC_FILES :=  ../Android/src/gl_code.cpp \
 					../Android/src/FileReader.cpp
+
+# Math library
+LOCAL_SRC_FILES += 	../Common/src/Vector2.cpp \
+					../Common/src/Rectangle.cpp
 # Common engine files
 LOCAL_SRC_FILES += 	../Common/src/Engine.cpp \
 					../Common/src/Debug.cpp \
 					../Common/src/Graphics.cpp \
 					../Common/src/Shader.cpp \
-					../Common/src/Mathlibrary.cpp
 
 LOCAL_LDLIBS    := -llog -lGLESv2 -landroid
 
