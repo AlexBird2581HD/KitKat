@@ -39,11 +39,6 @@ Rectangle::~Rectangle() { }
 
 // Public
 
-bool Rectangle::Intersects(Rectangle rectangle)
-{
-	return true;
-}
-
 bool Rectangle::Contains(Vector2 position)
 {
 	int Right = Left + Width;
@@ -51,7 +46,40 @@ bool Rectangle::Contains(Vector2 position)
 
 	if(position.x > Left && position.x < Right
 		&& position.y > Top && position.y < Bottom)
+	{
 		return true;
+	}
 
+	return false;
+}
+
+bool Rectangle::Intersects(Rectangle rectangle)
+{
+	Vector2 leftTop, leftBottom, rightTop, rightBottom;
+
+	// Top left corner
+	leftTop.x = rectangle.Left;
+	leftTop.y = rectangle.Top;
+
+	// Bottom left corner
+	leftBottom.x = rectangle.Left;
+	leftBottom.y = rectangle.Top + rectangle.Height;
+
+	// Top right corner
+	rightTop.x = rectangle.Left + Width;
+	rightTop.y = rectangle.Top;
+
+	// Bottom right corner
+	rightBottom.x = rectangle.Left + Width;
+	rightBottom.y = rectangle.Top + rectangle.Height;
+
+	// Use this keyword for clarity
+	// If any corner is inside the rectangle they intersect
+	if(this->Contains(leftTop) || this->Contains(leftBottom)
+		|| this->Contains(rightTop) || this->Contains(rightBottom))
+	{
+		return true;
+	}
+ 
 	return false;
 }

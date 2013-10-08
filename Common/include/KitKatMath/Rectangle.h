@@ -15,9 +15,9 @@ namespace KitKatMath
 		~Rectangle();
 		
 		float Width, Height, Left, Top;
-		
-		bool Intersects(Rectangle rectangle);
-		bool Contains(Vector2 position);
+
+		bool Contains(Vector2 position);		
+		bool Intersects(Rectangle rectangle);		
 	private:
 
 
