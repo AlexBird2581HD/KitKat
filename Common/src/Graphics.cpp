@@ -1,6 +1,6 @@
 #include <Graphics.h>
 #include <Debug.h>
-#include <stdlib.h> // malloc and free
+//#include <stdlib.h> // malloc and free
 
 using namespace KitKat;
 

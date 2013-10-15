@@ -1,6 +1,7 @@
 #include <Shader.h>
 #include <Debug.h>
 #include <FileReader.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <fstream>
 #include <cassert>
@@ -48,6 +49,14 @@ GLint Shader::getUniformLocation(const std::string& name)
 	GLint location = glGetUniformLocation(_program, name.c_str());
 	checkGlError("glGetUniformLocation");
 	return location;
+}
+
+void Shader::setUniform(const std::string& name, glm::mat4 mat4)
+{
+	GLint location = glGetUniformLocation(_program, name.c_str());
+	checkGlError("glGetUniformLocation");
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat4));
+	checkGlError("glUniformMatrix4fv");
 }
 
 void Shader::use()
