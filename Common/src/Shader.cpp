@@ -50,6 +50,13 @@ GLint Shader::getUniformLocation(const std::string& name)
 	return location;
 }
 
+void Shader::setUniform(const std::string& name, devmath::Matrix4 matrix)
+{
+	GLint loc = getUniformLocation(name);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, matrix.elements());
+	checkGlError("glUniformMatrix4fv");
+}
+
 void Shader::use()
 {
 	glUseProgram(_program);

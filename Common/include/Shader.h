@@ -8,6 +8,8 @@
 #include <GLES2/gl2ext.h>
 #endif
 
+#include <devmath/Matrix4.h>
+
 #include <string>
 
 namespace KitKat
@@ -22,8 +24,7 @@ namespace KitKat
 
 		GLint getAttribLocation(const std::string& name);
 		GLint getUniformLocation(const std::string& name);
-		//void setUniform(const std::string& name, matrix4);
-		//TODO: implement matrix4
+		void setUniform(const std::string& name, devmath::Matrix4 matrix);
 
 		void use();
 
