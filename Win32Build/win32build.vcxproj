@@ -31,6 +31,7 @@
     <ClCompile Include="..\Common\src\Engine.cpp" />
     <ClCompile Include="..\Common\src\Graphics.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
+    <ClCompile Include="..\Common\src\Texture.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\FileReader.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="..\Common\include\Engine.h" />
     <ClInclude Include="..\Common\include\Graphics.h" />
     <ClInclude Include="..\Common\include\Shader.h" />
+    <ClInclude Include="..\Common\include\Texture.h" />
     <ClInclude Include="..\Windows\include\FileReader.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
     <ClInclude Include="..\Windows\include\Window.h" />
@@ -94,8 +96,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\..\cygwin\cygwin.bat</Command>
-      <Message>Build android binaries</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,8 +120,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\..\cygwin\cygwin.bat</Command>
-      <Message>Build android binaries</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

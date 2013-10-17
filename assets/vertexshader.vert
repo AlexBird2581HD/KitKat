@@ -1,7 +1,9 @@
 attribute vec2 vPosition;
 attribute vec2 vTexCoord;
 
-uniform mat4 mvp;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 
 varying vec2 texCoord;
 

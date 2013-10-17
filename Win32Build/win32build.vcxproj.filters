@@ -90,6 +90,7 @@
     <ClCompile Include="..\Common\src\devmath\Vector4.cpp">
       <Filter>Common\src\devmath</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -116,5 +117,6 @@
     <ClInclude Include="..\Windows\include\FileReader.h">
       <Filter>Windows\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\include\Texture.h" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #define ENGINE_H
 
 #include <Graphics.h>
+
 namespace KitKat
 {
 	class Engine
