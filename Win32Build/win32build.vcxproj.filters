@@ -28,11 +28,8 @@
     <Filter Include="Android\src">
       <UniqueIdentifier>{87f28355-61fa-4ac2-b765-9102aacfc84e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\include\KitKatMath">
-      <UniqueIdentifier>{4bfefa18-bd7d-46e9-aea8-658d9a5e19e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\src\KitKatMath">
-      <UniqueIdentifier>{71f95ab4-0e02-4b88-9eda-8646f87af762}</UniqueIdentifier>
+    <Filter Include="Common\src\devmath">
+      <UniqueIdentifier>{cabc5104-1563-453d-b700-c6df4f3c3eab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,11 +63,32 @@
     <ClCompile Include="..\Android\src\FileReader.cpp">
       <Filter>Android\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\src\Vector2.cpp">
-      <Filter>Common\src\KitKatMath</Filter>
+    <ClCompile Include="..\Common\src\devmath\Matrix3.cpp">
+      <Filter>Common\src\devmath</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\src\Rectangle.cpp">
-      <Filter>Common\src\KitKatMath</Filter>
+    <ClCompile Include="..\Common\src\devmath\Matrix4.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Point.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Quaternion.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Rectangle.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Utils.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Vector2.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Vector3.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Vector4.cpp">
+      <Filter>Common\src\devmath</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,15 +115,6 @@
     </ClInclude>
     <ClInclude Include="..\Windows\include\FileReader.h">
       <Filter>Windows\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\include\KitKatMath\Vector2.h">
-      <Filter>Common\include\KitKatMath</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\include\KitKatMath\Util.h">
-      <Filter>Common\include\KitKatMath</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\include\KitKatMath\Rectangle.h">
-      <Filter>Common\include\KitKatMath</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
