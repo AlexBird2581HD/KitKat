@@ -1,5 +1,7 @@
 //precision highp float;
 
+uniform sampler2D texSampler;
+
 varying vec2 texCoord;
 
 void main() 
