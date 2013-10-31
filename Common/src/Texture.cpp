@@ -49,7 +49,6 @@ void Texture::bind(Shader* shader)
 	checkGlError("glTexParameteri");
 
 	GLint location = shader->getUniformLocation("texSampler");
-	checkGlError("glGetUniformLocation");
 	glUniform1i(location, 0);
 	checkGlError("glUniform1i");
 }
@@ -158,7 +157,7 @@ Texture::BYTE* Texture::formatData(const BYTE* buffer, const int dataSize, const
             else
                 bufferIndex = y * width + x;
 
-            data[dataIndex]                = buffer[bufferIndex + 2];
+            data[dataIndex]     = buffer[bufferIndex + 2];
             data[dataIndex + 1] = buffer[bufferIndex + 1];
             data[dataIndex + 2] = buffer[bufferIndex];
 

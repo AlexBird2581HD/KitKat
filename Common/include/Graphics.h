@@ -9,6 +9,9 @@
 #endif
 
 #include <Shader.h>
+#include <Quad.h>
+
+#include <vector>
 
 namespace KitKat
 {
@@ -23,6 +26,9 @@ namespace KitKat
 		Shader* _shader;
 		GLuint gvPositionHandle;
 		GLuint VBO; // Vertex Buffer Object
+
+		//std::vector<Quad*> quads;
+		Quad* quad;
 
 		bool setupGraphics(int w, int h);
 		void clear();

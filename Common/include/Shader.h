@@ -24,7 +24,9 @@ namespace KitKat
 
 		GLint getAttribLocation(const std::string& name);
 		GLint getUniformLocation(const std::string& name);
-		void setUniform(const std::string& name, devmath::Matrix4 matrix);
+		//void setUniform(const std::string& name, devmath::Matrix4 matrix);
+		void setUniform(const std::string& name, float* matrixArray); // Well matrix-ish
+
 
 		void use();
 

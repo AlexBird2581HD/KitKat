@@ -30,6 +30,7 @@
     <ClCompile Include="..\Common\src\devmath\Vector4.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
     <ClCompile Include="..\Common\src\Graphics.cpp" />
+    <ClCompile Include="..\Common\src\Quad.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
     <ClCompile Include="..\Common\src\Texture.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
     <ClInclude Include="..\Common\include\Graphics.h" />
+    <ClInclude Include="..\Common\include\Quad.h" />
     <ClInclude Include="..\Common\include\Shader.h" />
     <ClInclude Include="..\Common\include\Texture.h" />
     <ClInclude Include="..\Windows\include\FileReader.h" />

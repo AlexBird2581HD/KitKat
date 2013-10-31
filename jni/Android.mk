@@ -36,6 +36,7 @@ LOCAL_SRC_FILES += 	../Common/src/devmath/Vector2.cpp \
 					../Common/src/devmath/Matrix4.cpp \
 					../Common/src/devmath/Quaternion.cpp \
 					../Common/src/devmath/Utils.cpp
+					
 # Common engine files
 LOCAL_SRC_FILES += 	../Common/src/Engine.cpp \
 					../Common/src/Debug.cpp \

@@ -46,14 +46,15 @@ GLint Shader::getAttribLocation(const std::string& name)
 GLint Shader::getUniformLocation(const std::string& name)
 {
 	GLint location = glGetUniformLocation(_program, name.c_str());
-	checkGlError("glGetUniformLocation");
+	//checkGlError("glGetUniformLocation");
 	return location;
 }
 
-void Shader::setUniform(const std::string& name, devmath::Matrix4 matrix)
+//void Shader::setUniform(const std::string& name, devmath::Matrix4 matrix)
+void Shader::setUniform(const std::string& name, float* matrixArray)
 {
 	GLint loc = getUniformLocation(name);
-	glUniformMatrix4fv(loc, 1, GL_FALSE, matrix.elements());
+	glUniformMatrix4fv(loc, 1, GL_FALSE, matrixArray);
 	checkGlError("glUniformMatrix4fv");
 }
 
