@@ -28,6 +28,9 @@
     <Filter Include="Android\src">
       <UniqueIdentifier>{87f28355-61fa-4ac2-b765-9102aacfc84e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\src\devmath">
+      <UniqueIdentifier>{cabc5104-1563-453d-b700-c6df4f3c3eab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\src\OpenGL.cpp">
@@ -51,9 +54,6 @@
     <ClCompile Include="..\Common\src\Graphics.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\src\Mathlibrary.cpp">
-      <Filter>Common\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\src\Shader.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
@@ -63,6 +63,34 @@
     <ClCompile Include="..\Android\src\FileReader.cpp">
       <Filter>Android\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Matrix3.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Matrix4.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Point.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Quaternion.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Rectangle.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Utils.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Vector2.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Vector3.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\devmath\Vector4.cpp">
+      <Filter>Common\src\devmath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -80,9 +108,6 @@
     <ClInclude Include="..\Common\include\Graphics.h">
       <Filter>Common\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\include\Mathlibrary.h">
-      <Filter>Common\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\include\Shader.h">
       <Filter>Common\include</Filter>
     </ClInclude>
@@ -92,5 +117,6 @@
     <ClInclude Include="..\Windows\include\FileReader.h">
       <Filter>Windows\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\include\Texture.h" />
   </ItemGroup>
 </Project>

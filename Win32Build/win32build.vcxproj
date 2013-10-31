@@ -19,10 +19,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\Common\src\Debug.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Matrix3.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Matrix4.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Point.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Quaternion.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Rectangle.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Utils.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Vector2.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Vector3.cpp" />
+    <ClCompile Include="..\Common\src\devmath\Vector4.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
     <ClCompile Include="..\Common\src\Graphics.cpp" />
-    <ClCompile Include="..\Common\src\Mathlibrary.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
+    <ClCompile Include="..\Common\src\Texture.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\FileReader.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
@@ -33,8 +42,8 @@
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
     <ClInclude Include="..\Common\include\Graphics.h" />
-    <ClInclude Include="..\Common\include\Mathlibrary.h" />
     <ClInclude Include="..\Common\include\Shader.h" />
+    <ClInclude Include="..\Common\include\Texture.h" />
     <ClInclude Include="..\Windows\include\FileReader.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
     <ClInclude Include="..\Windows\include\Window.h" />
@@ -87,8 +96,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\..\cygwin\cygwin.bat</Command>
-      <Message>Build android binaries</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,8 +120,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)..\..\cygwin\cygwin.bat</Command>
-      <Message>Build android binaries</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

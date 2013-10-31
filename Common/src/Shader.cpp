@@ -1,5 +1,6 @@
 #include <Shader.h>
 #include <Debug.h>
+#include <FileReader.h>
 
 #include <fstream>
 #include <cassert>
@@ -13,15 +14,20 @@ Shader::Shader(const std::string& vertex, const std::string& fragment, bool load
 		create(vertex, fragment);
 		return;
 	}
-	std::string vertexCode = readFile(vertex);
-	std::string fragmentCode = readFile(fragment);
 
+	FileReader vertexFile(vertex.c_str());
+	FileReader fragmentFile(fragment.c_str());
+
+	std::string vertexCode = vertexFile.ReadFile();
+	std::string fragmentCode = fragmentFile.ReadFile();
 	create(vertexCode, fragmentCode);
 }
+
 Shader::~Shader()
 {
 	destroy();
 }
+
 
 // Public
 
@@ -44,39 +50,32 @@ GLint Shader::getUniformLocation(const std::string& name)
 	return location;
 }
 
+void Shader::setUniform(const std::string& name, devmath::Matrix4 matrix)
+{
+	GLint loc = getUniformLocation(name);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, matrix.elements());
+	checkGlError("glUniformMatrix4fv");
+}
+
 void Shader::use()
 {
 	glUseProgram(_program);
 	checkGlError("glUseProgram");
 }
 
+
 // Private
-
-std::string Shader::readFile(const std::string fileName)
-{
-	std::string content;
-	std::fstream file;
-	file.open(fileName.c_str(), std::ios::in);
-	// Android needs the .c_str() to compile
-
-	if(file.is_open())
-	{
-		std::string line;
-		while(std::getline(file, line))
-			content += line;
-	}
-	
-	return content;
-}
 
 void Shader::create(const std::string& vertexCode, const std::string& fragmentCode)
 {
 	createProgram();
+	checkGlError("createProgram");
 
 	_vertexShader = createShader(GL_VERTEX_SHADER, vertexCode);
-	_fragmentShader = createShader(GL_VERTEX_SHADER, fragmentCode);
+	_fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentCode);
 
 	linkProgram();
+	checkGlError("linkProgram");
 }
 
 void Shader::destroy()
@@ -98,6 +97,19 @@ void Shader::createProgram()
 void Shader::linkProgram()
 {
 	glLinkProgram(_program);
+	checkGlError("glLinkProgram");
+
+	GLint link = 0;
+	glGetProgramiv(_program, GL_LINK_STATUS, &link);
+	checkGlError("glGetProgramiv_link");
+	if(link == GL_FALSE)
+	{
+		char log[1024];
+		glGetProgramInfoLog(_program, 1024, 0, log);
+		checkGlError("glGetProgramInfoLog_link");
+		LOGE("%s", log); // Stupid android
+	}
+	checkGlError("linkkaus");
 }
 
 GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
@@ -105,28 +117,34 @@ GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
 	GLuint shader = glCreateShader(shaderType);
 
 	compileShader(shader, code.c_str());
+	checkGlError("compileShader");
 	attachShader(shader);
+	checkGlError("attachShader");
 	
 	return shader;
 }
-
-
 
 void Shader::compileShader(const GLuint shader, const char* code)
 {
 	// Takes one string(second parameter)
 	// and assumes strings are null terminated(last parameter)
 	glShaderSource(shader, 1, &code, NULL);
+	checkGlError("glShaderSource");
 	glCompileShader(shader);
 	checkGlError("glCompileShader");
 
 	GLint compiled = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+	checkGlError("glGetShaderiv");
+
 
 	if(compiled == GL_FALSE)
 	{
 		LOGE("Shader compilation failed");
-		destroy(); // Remove everything just in case
+		char log[1024];
+		glGetShaderInfoLog(shader, 1024, 0, log);
+		LOGE("%s", log); // Again, stupid android
+		//destroy(); // Remove everything just in case
 		assert(false);
 	}
 }

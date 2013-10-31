@@ -45,15 +45,15 @@ bool Graphics::setupGraphics(int width, int height)
 	LOGI("setupGraphics(%d, %d)", width, height);
 
 	_shader = new Shader("vertexshader.vert", "fragmentshader.frag");
+	checkGlError("Shader");
 
-	gvPositionHandle = _shader->getAttribLocation("vPosition");
-    checkGlError("glGetAttribLocation");
-    LOGI("glGetAttribLocation(\"vPosition\") = %d\n", gvPositionHandle);
-
-	glViewport(0, 0, width, height);
+    glViewport(0, 0, width, height);
     checkGlError("glViewport");
 
 	_shader->use();
+
+	gvPositionHandle = _shader->getAttribLocation("vPosition");
+	LOGI("glGetAttribLocation(\"vPosition\") = %d\n", gvPositionHandle);
 
 	glGenBuffers(1, &VBO); // Create the VBO
 	checkGlError("glGenBuffers");
