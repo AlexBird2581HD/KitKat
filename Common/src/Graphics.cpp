@@ -1,6 +1,6 @@
 #include <Graphics.h>
 #include <Debug.h>
-#include <stdlib.h> // malloc and free
+#include <cstdlib> // malloc and free
 
 using namespace KitKat;
 
@@ -22,6 +22,9 @@ bool Graphics::Init(int width, int height)
 	//quads.push_back(new Quad(100, 100, 100 ,100));
 	//quads.at(0)->setTexture(Texture::loadFile("testi.tga"));
 
+	quad = new Quad(100, -100, 100, 100);
+	quad->setTexture(Texture::loadFile("test1.tga"));
+
 	checkGlError("Setup");
 	GLfloat Projection[16] = 
 	{
@@ -31,7 +34,7 @@ bool Graphics::Init(int width, int height)
 		,0,	0,	0,	1
 	};
 	//Quad::setProjection(Projection);
-	Quad::Projection = (float*)malloc(sizeof(float)*16);
+	Quad::Projection = (float*)calloc(16,sizeof(float));
 	Quad::Projection[0] = Projection[0];
 	Quad::Projection[1] = Projection[1];
 	Quad::Projection[2] = Projection[2];
@@ -48,11 +51,6 @@ bool Graphics::Init(int width, int height)
 	Quad::Projection[13] = Projection[13];
 	Quad::Projection[14] = Projection[14];
 	Quad::Projection[15] = Projection[15];
-
-	quad = new Quad(0, 0, 100, 100);
-	quad->setTexture(Texture::loadFile("testi.tga"));
-
-	
 
 	return true;
 }
@@ -75,6 +73,8 @@ void Graphics::Draw()
 
 bool Graphics::setupGraphics(int width, int height)
 {
+	glEnable(GL_TEXTURE_2D);
+	checkGlError("glEnable");
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	checkGlError("glPixelStorei");
 	printGLString("Version", GL_VERSION);
@@ -95,7 +95,13 @@ bool Graphics::setupGraphics(int width, int height)
 	//glGenBuffers(1, &VBO); // Create the VBO
 	//checkGlError("glGenBuffers");
 
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+#ifdef _WIN32
+	glClearDepth(1);
+#else
+	glClearDepthf(1);
+#endif
+
+	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 	checkGlError("glClearColor");
     return true;
 }

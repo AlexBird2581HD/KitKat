@@ -18,9 +18,9 @@ namespace KitKat
 		
 		void setTexture(Texture* texture);
 		static void setProjection(float* matrixArray);
+		static float* Projection;
 
 		void draw(Shader* shader);
-		static float* Projection;
 	private:
 		int _x, _y, _w, _h;
 
@@ -28,9 +28,9 @@ namespace KitKat
 
 		GLuint _vbo;
 
-		float *Translation, *Rotation;
+		float *Translation, *Rotation, *Scale;
+		float *Data;
 		
-
 		void genBuffer();
 	};
 }

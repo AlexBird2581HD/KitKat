@@ -46,7 +46,7 @@ GLint Shader::getAttribLocation(const std::string& name)
 GLint Shader::getUniformLocation(const std::string& name)
 {
 	GLint location = glGetUniformLocation(_program, name.c_str());
-	//checkGlError("glGetUniformLocation");
+	checkGlError("glGetUniformLocation");
 	return location;
 }
 

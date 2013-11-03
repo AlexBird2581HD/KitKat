@@ -42,7 +42,8 @@ LOCAL_SRC_FILES += 	../Common/src/Engine.cpp \
 					../Common/src/Debug.cpp \
 					../Common/src/Graphics.cpp \
 					../Common/src/Shader.cpp \
-					../Common/src/Texture.cpp
+					../Common/src/Texture.cpp \
+					../Common/src/Quad.cpp
 
 LOCAL_LDLIBS    := -llog -lGLESv2 -landroid
 

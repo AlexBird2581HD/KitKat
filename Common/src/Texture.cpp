@@ -43,9 +43,9 @@ void Texture::bind(Shader* shader)
 
 	bindObject(this);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	checkGlError("glTexParameteri");
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	checkGlError("glTexParameteri");
 
 	GLint location = shader->getUniformLocation("texSampler");
@@ -150,7 +150,7 @@ Texture::BYTE* Texture::formatData(const BYTE* buffer, const int dataSize, const
     {
         for(int x = 0; x < width; x += componentCount)
         {
-            dataIndex = (header.height - 1- y) * width + x;
+			dataIndex = (header.height - 1 - y) * width + x;
 
             if(isOriginAtBottom)
                  bufferIndex = dataIndex;
