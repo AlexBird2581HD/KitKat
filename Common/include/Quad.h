@@ -1,37 +1,38 @@
-#ifndef QUAD_H
-#define QUAD_H
-
-#include <Shader.h>
-#include <Texture.h>
-
-namespace KitKat
+#pragma once
+#ifndef QUAD
+#define QUAD
+#include <Win32toAndroid.h>
+class Shader;
+class Quad
 {
-	class Quad
-	{
-	public:
-		Quad(int x, int y, int w, int h);
-		~Quad();
+public:
+	Quad(int,int,int,int);
+	void move(int,int);
+	void resize(int,int);
+	void rotate(float);
+	void Draw(float);
+	void setTexture(GLuint);
+	void setShader(Shader*);
 
-		void move(int x, int y);
-		void resize(int width, int height);
-		void rotate(float angle);
-		
-		void setTexture(Texture* texture);
-		static void setProjection(float* matrixArray);
-		static float* Projection;
+	int getX() { return x; }
+	int getY() { return y; }
 
-		void draw(Shader* shader);
-	private:
-		int _x, _y, _w, _h;
 
-		Texture* _tex;
+	static float*Projection;
 
-		GLuint _vbo;
+	~Quad(void);
+private:
+	
+	void GenBuffer();
+	float* Scale;
+	float* Translation;
+	int x,y,w,h;
+	float* Data;
+	float* Rotation;
+	GLuint texid,VBO;
+	Shader* shader;
 
-		float *Translation, *Rotation, *Scale;
-		float *Data;
-		
-		void genBuffer();
-	};
-}
+
+};
+
 #endif

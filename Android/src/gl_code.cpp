@@ -46,7 +46,7 @@ extern "C" {
 JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_init(JNIEnv * env, jobject obj,  jint width, jint height)
 {
 	//enter native
-    engine->Init(width, height);
+	engine->fixAspectRatio(1024, 768, width, height);
 }
 
 JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_step(JNIEnv * env, jobject obj)

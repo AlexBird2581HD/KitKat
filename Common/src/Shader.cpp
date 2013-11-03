@@ -1,157 +1,89 @@
 #include <Shader.h>
-#include <Debug.h>
-#include <FileReader.h>
+#include <stdlib.h>
 
-#include <fstream>
-#include <cassert>
+GLuint Shader::loadShader(GLenum shaderType, const char* pSource) {
+    GLuint shader = glCreateShader(shaderType);
+    if (shader) {
+        glShaderSource(shader, 1, &pSource, NULL);
+        glCompileShader(shader);
+        GLint compiled = 0;
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+        if (!compiled) {
+            GLint infoLen = 0;
+            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+            if (infoLen) {
+                char* buf = (char*) malloc(infoLen);
+                if (buf) {
+                    glGetShaderInfoLog(shader, infoLen, NULL, buf);
+                    #ifndef WINDOWS_FRAMEWORK
+                    LOGE("Could not compile shader %d:\n%s\n",
+                            shaderType, buf);
+                    #else
+ 
+                    #endif
+                     
+                         
+                    free(buf);
+                }
+                glDeleteShader(shader);
+                shader = 0;
+            }
+        }
+    }
+    return shader;
+} 
 
-using namespace KitKat;
-
-Shader::Shader(const std::string& vertex, const std::string& fragment, bool loadFromFile)
+Shader::Shader(void)
 {
-	if(!loadFromFile)
-	{
-		create(vertex, fragment);
-		return;
-	}
+	static const char gVertexShader[] = 
+    "attribute vec3 vPosition;\n"
+	"attribute vec2 vUv;\n"
+	"uniform mat4 Projection;\n"
+	"uniform mat4 Translation;\n"
+	"uniform mat4 Scale;\n"
+	"uniform mat4 Rotation;\n"
+	"varying vec2 Uv;\n"
+    "void main() {\n"
+	"  gl_Position = vec4(vPosition,1.0);\n"
+	"  gl_Position *= Scale;\n"	
+	"  gl_Position *= Rotation;\n"	
+	"  gl_Position *= Translation;\n"	
+	"  gl_Position *= Projection;\n"	
+	"  Uv = vUv;\n"
+    "}\n";
+ 
+    static const char gFragmentShader[] = 
+	"precision mediump float;\n"
+	"varying vec2 Uv;\n"
+	"uniform sampler2D s_texture;\n"
+    "void main() {\n"
+    "  gl_FragColor = texture2D(s_texture,Uv);\n"
+    "}\n"; 
 
-	FileReader vertexFile(vertex.c_str());
-	FileReader fragmentFile(fragment.c_str());
+	PS = loadShader(GL_FRAGMENT_SHADER,gFragmentShader); 
+    VS = loadShader(GL_VERTEX_SHADER,gVertexShader); 
 
-	std::string vertexCode = vertexFile.ReadFile();
-	std::string fragmentCode = fragmentFile.ReadFile();
-	create(vertexCode, fragmentCode);
+    Program = glCreateProgram(); 
+  
+
+    glAttachShader(Program,VS); 
+    glAttachShader(Program,PS); 
+    glLinkProgram(Program); 
+
+    glBindAttribLocation(Program,0,"vPosition"); 
+
+	glBindAttribLocation(Program,1,"vUv"); 
+
+	Position = glGetAttribLocation(Program,"vPosition");
+	Uv = glGetAttribLocation(Program,"vUv");
+	loc = glGetUniformLocation(Program, "s_texture");
+	loc2 = glGetUniformLocation(Program, "Projection");
+	loc3 = glGetUniformLocation(Program, "Translation");
+	loc4 = glGetUniformLocation(Program, "Rotation");
+	loc5 = glGetUniformLocation(Program, "Scale");
 }
 
-Shader::~Shader()
+
+Shader::~Shader(void)
 {
-	destroy();
-}
-
-
-// Public
-
-GLuint Shader::program()
-{
-	return _program;
-}
-
-GLint Shader::getAttribLocation(const std::string& name)
-{
-	GLint location = glGetAttribLocation(_program, name.c_str());
-	checkGlError("glGetAttribLocation");
-	return location;
-}
-
-GLint Shader::getUniformLocation(const std::string& name)
-{
-	GLint location = glGetUniformLocation(_program, name.c_str());
-	checkGlError("glGetUniformLocation");
-	return location;
-}
-
-//void Shader::setUniform(const std::string& name, devmath::Matrix4 matrix)
-void Shader::setUniform(const std::string& name, float* matrixArray)
-{
-	GLint loc = getUniformLocation(name);
-	glUniformMatrix4fv(loc, 1, GL_FALSE, matrixArray);
-	checkGlError("glUniformMatrix4fv");
-}
-
-void Shader::use()
-{
-	glUseProgram(_program);
-	checkGlError("glUseProgram");
-}
-
-
-// Private
-
-void Shader::create(const std::string& vertexCode, const std::string& fragmentCode)
-{
-	createProgram();
-	checkGlError("createProgram");
-
-	_vertexShader = createShader(GL_VERTEX_SHADER, vertexCode);
-	_fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentCode);
-
-	linkProgram();
-	checkGlError("linkProgram");
-}
-
-void Shader::destroy()
-{
-	glDeleteShader(_vertexShader);
-	checkGlError("glDeleteShader");
-	glDeleteShader(_fragmentShader);
-	checkGlError("glDeleteShader");
-	
-	glDeleteProgram(_program);
-	checkGlError("glDeleteProgram");
-}
-
-void Shader::createProgram()
-{
-	_program = glCreateProgram();
-}
-
-void Shader::linkProgram()
-{
-	glLinkProgram(_program);
-	checkGlError("glLinkProgram");
-
-	GLint link = 0;
-	glGetProgramiv(_program, GL_LINK_STATUS, &link);
-	checkGlError("glGetProgramiv_link");
-	if(link == GL_FALSE)
-	{
-		char log[1024];
-		glGetProgramInfoLog(_program, 1024, 0, log);
-		checkGlError("glGetProgramInfoLog_link");
-		LOGE("%s", log); // Stupid android
-	}
-	checkGlError("linkkaus");
-}
-
-GLuint Shader::createShader(const GLenum shaderType, const std::string& code)
-{
-	GLuint shader = glCreateShader(shaderType);
-
-	compileShader(shader, code.c_str());
-	checkGlError("compileShader");
-	attachShader(shader);
-	checkGlError("attachShader");
-	
-	return shader;
-}
-
-void Shader::compileShader(const GLuint shader, const char* code)
-{
-	// Takes one string(second parameter)
-	// and assumes strings are null terminated(last parameter)
-	glShaderSource(shader, 1, &code, NULL);
-	checkGlError("glShaderSource");
-	glCompileShader(shader);
-	checkGlError("glCompileShader");
-
-	GLint compiled = 0;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
-	checkGlError("glGetShaderiv");
-
-
-	if(compiled == GL_FALSE)
-	{
-		LOGE("Shader compilation failed");
-		char log[1024];
-		glGetShaderInfoLog(shader, 1024, 0, log);
-		LOGE("%s", log); // Again, stupid android
-		//destroy(); // Remove everything just in case
-		assert(false);
-	}
-}
-
-void Shader::attachShader(const GLuint shader)
-{
-	glAttachShader(_program, shader);
-	checkGlError("glAttachShader");
 }

@@ -1,21 +1,38 @@
 #pragma once
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef ENGINE
+#define ENGINE
 
-#include <Graphics.h>
+#include <Win32toAndroid.h>
 
-namespace KitKat
+class Shader;
+class Quad;
+
+class Engine
 {
-	class Engine
-	{
-	public:
-		Engine();
-		~Engine();
-		void Update();
-		void Draw();
-		bool Init(int width, int height);
+public:
+
+	Engine();
+	~Engine(); 
+	void fixAspectRatio(float desiredWidth,float desiredHeight,float width,float height);
+	void Update();
+	void Draw();
+	float Scale,blackBarH,blackBarV;
+	int x,y;
+
 	private:
-		Graphics* graphics;
-	};
-}
+
+		int width, height;
+	
+		GLfloat* GlProjection;
+
+		float sine;
+
+		Quad* Quad1;
+		Quad* Quad2;
+		Quad* Quad3;
+
+		int velx, vely;
+
+		GLuint Texture;
+};
 #endif

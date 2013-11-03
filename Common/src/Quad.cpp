@@ -1,188 +1,159 @@
 #include <Quad.h>
-#include <Debug.h>
-#include <cstdlib>
-
-using namespace KitKat;
+#include <Shader.h>
+#include <cmath>
+#include <stdlib.h>
 
 float* Quad::Projection = NULL;
 
-Quad::Quad(int x, int y, int w, int h)
-	: _x(x),
-	  _y(y),
-	  _w(w),
-	  _h(h)
+Quad::Quad(int W,int H,int X, int Y)
 {
-	Translation = (float*)calloc(16, sizeof(float));
-	Rotation = (float*)calloc(16, sizeof(float));
-	Scale = (float*)calloc(16, sizeof(float));
+	w = W;
+	h = H;
+	x = X;
+	y = Y;
 
-	glGenBuffers(1, &_vbo);
-	checkGlError("glGenBuffers");
-	genBuffer();
-	move(x, y);
-	resize(w, h);
+	Translation = (float*)calloc(16,sizeof(float));
+	Rotation = (float*)calloc(16,sizeof(float));
+	Scale = (float*)calloc(16,sizeof(float));
+	glGenBuffers(1,&VBO);
+	GenBuffer();
+	move(x,y);
+	resize(w,h);
 	rotate(0);
+	
 }
 
-Quad::~Quad()
+void Quad::GenBuffer()
 {
-	delete _tex;
+	Data = (float*)malloc(30*sizeof(float));
+
+	Data[0] = -0.5f; 
+    Data[1] = -0.5f; 
+    Data[2] = 0; 
+
+    Data[3] = 0; 
+    Data[4] = 0; 
+
+
+    Data[5] = -0.5f; 
+    Data[6] = 0.5f; 
+    Data[7] = 0;
+
+    Data[8] = 0; 
+    Data[9] = 1; 
+
+
+    Data[10] = 0.5f; 
+    Data[11] = -0.5f; 
+	Data[12] = 0; 
+
+    Data[13] = 1; 
+    Data[14] = 0; 
+    
+
+    Data[15] = -0.5f; 
+    Data[16] = 0.5f; 
+    Data[17] = 0; 
+
+	Data[18] = 0; 
+    Data[19] = 1; 
+
+
+    Data[20] = 0.5f; 
+    Data[21] = 0.5f; 
+	Data[22] = 0; 
+
+    Data[23] = 1; 
+    Data[24] = 1; 
+
+
+    Data[25] = 0.5f; 
+    Data[26] = -0.5f; 
+    Data[27] = 0; 
+
+	Data[28] = 1; 
+    Data[29] = 0; 
+	
+  
+  
+    glBindBuffer(GL_ARRAY_BUFFER,VBO); 
+  
+    glBufferData(GL_ARRAY_BUFFER,sizeof(Data)*30,Data,GL_DYNAMIC_DRAW); 
 	free(Data);
 }
 
-
-// Public
-
-
-void Quad::move(int x, int y)
+void Quad::move(int X,int Y)
 {
-	_x = x; _y = y;
-
 	Translation[0] = 1;
-	Translation[3] = _x;
+	Translation[3] = X;
 	Translation[5] = 1;
-	Translation[7] = _y;
+	Translation[7] = Y;
 	Translation[10] = 1;
 	Translation[15] = 1;
+	x = X; y = Y;
 }
 
-void Quad::resize(int width, int height)
+void Quad::resize(int W,int H)
 {
-	_w = width;
-	_h = height;
+	w = W;
+	h = H;
 
-	Scale[0] = _w;
-	Scale[5] = _h;
+	Scale[0] = w;
+	Scale[5] = h;
 	Scale[10] = 1;
 	Scale[15] = 1;
 }
 
-void Quad::rotate(float angle)
+void Quad::rotate(float r)
 {
-	Rotation[0] = std::cos(-angle);
-	Rotation[1] = -std::sin(-angle);
-	Rotation[4] = std::sin(-angle);
-	Rotation[5] = std::cos(-angle);
+	Rotation[0] = std::cos(-r);
+	Rotation[1] = -std::sin(-r);
+	Rotation[4] = std::sin(-r);
+	Rotation[5] = std::cos(-r);
 	Rotation[10] = 1;
 	Rotation[15] = 1;
 }
 
-void Quad::setTexture(Texture* texture)
+void Quad::Draw(float z)
 {
-	_tex = texture;
-}
-
-void Quad::setProjection(float* matrixArray)
-{
-	Quad::Projection = (float*)malloc(sizeof(float)*16);
-}
-
-void Quad::draw(Shader* shader)
-{
-	GLint pos, texCoord;
-	pos = shader->getAttribLocation("vPosition");
-	texCoord = shader->getAttribLocation("vTexCoord");	
-	glEnableVertexAttribArray(pos);
-	glEnableVertexAttribArray(texCoord);
-
-	Translation[11] = 1.0f;
-
-	shader->use();
+	glEnableVertexAttribArray(shader->Position);    
+	glEnableVertexAttribArray(shader->Uv);   
+	glUseProgram(shader->Program);
 
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_DEPTH_TEST);
 
-	glEnable(GL_BLEND);
-	checkGlError("glEnable");
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	checkGlError("glBlendFunc");
+	glEnable (GL_BLEND);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	_tex->bind(shader);
+	Translation[11] = z;
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texid);
 
-	
+	glUniform1i(shader->loc, 0); 
 
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 5*sizeof(GL_FLOAT), 0);
-	checkGlError("glVertexAttribPointerPos");
-	glVertexAttribPointer(texCoord, 2, GL_FLOAT, GL_FALSE, 5*sizeof(GL_FLOAT), (void*)(sizeof(GL_FLOAT)*3)); 
-	checkGlError("glVertexAttribPointerTex");
-	
-	checkGlError("glEnableVertexAttribArray");
-
-	shader->setUniform("Projetion", Projection);
-	shader->setUniform("Translation", Translation);
-	shader->setUniform("Scale", Scale);
-	shader->setUniform("Rotation", Rotation);
-
-	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	checkGlError("glBindBuffer");
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	checkGlError("glDrawArrays");
-
-	glDisableVertexAttribArray(pos);
-	glDisableVertexAttribArray(texCoord);
-
-	//move(_x + 1, _y);
-	glDisable(GL_BLEND);
+    glVertexAttribPointer(shader->Position,3,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),0); 
+	glVertexAttribPointer(shader->Uv,2,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(void*)(sizeof(GL_FLOAT)*3)); 
+	glUniformMatrix4fv(shader->loc2,1,GL_FALSE,Projection);
+	glUniformMatrix4fv(shader->loc3,1,GL_FALSE,Translation);
+	glUniformMatrix4fv(shader->loc4,1,GL_FALSE,Rotation);
+	glUniformMatrix4fv(shader->loc5,1,GL_FALSE,Scale);
+	glBindBuffer(GL_ARRAY_BUFFER,VBO); 
+    glDrawArrays(GL_TRIANGLES,0,6); 
+	glDisableVertexAttribArray(shader->Position);    
+	glDisableVertexAttribArray(shader->Uv);   
 }
 
-
-// Private
-
-
-void Quad::genBuffer()
+void Quad::setTexture(GLuint Texture)
 {
-	Data = (float*)malloc(30 * sizeof(float));
+	texid = Texture;
+}
 
-	Data[0] = -0.5f;
-	Data[1] = -0.5f;
-	Data[2] = 0;
+void Quad::setShader(Shader* shader2)
+{
+	shader = shader2;
+}
 
-	Data[3] = 0;
-	Data[4] = 0;
-
-
-	Data[5] = -0.5f;
-	Data[6] = 0.5f;
-	Data[7] = 0;
-
-	Data[8] = 0;
-	Data[9] = 1;
-
-
-	Data[10] = 0.5f;
-	Data[11] = -0.5f;
-	Data[12] = 0;
-
-	Data[13] = 1;
-	Data[14] = 0;
-
-
-	Data[15] = -0.5f;
-	Data[16] = 0.5f;
-	Data[17] = 0;
-
-	Data[18] = 0;
-	Data[19] = 1;
-
-
-	Data[20] = 0.5f;
-	Data[21] = 0.5f;
-	Data[22] = 0;
-
-	Data[23] = 1;
-	Data[24] = 1;
-
-
-	Data[25] = 0.5f;
-	Data[26] = -0.5f;
-	Data[27] = 0;
-
-	Data[28] = 1;
-	Data[29] = 0;
-
-	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	checkGlError("glBindBuffer");
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Data)* 30, Data, GL_DYNAMIC_DRAW);
-	checkGlError("glBufferData");
+Quad::~Quad(void)
+{
 }

@@ -30,10 +30,14 @@
     <ClCompile Include="..\Common\src\devmath\Vector3.cpp" />
     <ClCompile Include="..\Common\src\devmath\Vector4.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
-    <ClCompile Include="..\Common\src\Graphics.cpp" />
+    <ClCompile Include="..\Common\src\Graphics.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\Common\src\Quad.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
-    <ClCompile Include="..\Common\src\Texture.cpp" />
+    <ClCompile Include="..\Common\src\Texture.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\FileReader.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />

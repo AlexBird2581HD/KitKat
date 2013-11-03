@@ -5,7 +5,7 @@ using namespace KitKat;
 
 FileReader::FileReader(const char* path)
 {
-	filePath = std::string("..\\Assets\\");
+	filePath = std::string("..\\assets\\");
 	filePath += path;
 	file = fopen(filePath.c_str(), "rb");
 }

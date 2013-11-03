@@ -96,8 +96,8 @@ Window::Window(HINSTANCE instance,const char* windowName,int width,int height)
 	// Handled by engine->Init
 
 	MSG msg ={};
-	KitKat::Engine* engine = new KitKat::Engine();
-	engine->Init(width, height);
+	Engine* engine = new Engine();
+	engine->fixAspectRatio(1024, 768, width, height);
 	// Main message loop:
 	while(msg.message != WM_QUIT)
 	{
