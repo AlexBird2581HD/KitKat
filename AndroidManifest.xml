@@ -18,11 +18,11 @@
 */
 -->
 
-<manifest package="com.android.KaNot" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.android.KitKat" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application android:label="@string/KaNot_activity" >
         <activity
-            android:name="KaNotActivity"
+            android:name="com.android.KaNot.KaNotActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
