@@ -22,14 +22,14 @@ bool Graphics::Init(int width, int height)
 	//quads.push_back(new Quad(100, 100, 100 ,100));
 	//quads.at(0)->setTexture(Texture::loadFile("testi.tga"));
 
-	quad = new Quad(100, -100, 100, 100);
+	quad = new Quad(0, 0, 100, 100);
 	quad->setTexture(Texture::loadFile("test1.tga"));
 
 	checkGlError("Setup");
 	GLfloat Projection[16] = 
 	{
-		1.0f/width, 0,	0,	-1
-		,0,	1.0f/height,0,1
+		1.0f/width, 0,	0, 0
+		,0,	1.0f/height,0, 0
 		,0,	0,	1,	0
 		,0,	0,	0,	1
 	};

@@ -12,9 +12,11 @@ void main()
 {
 	texCoord = vTexCoord;
 	
-	gl_Position = vec4(vPosition, 1.0);
-	gl_Position *= Scale;
-	gl_Position *= Rotation;
-	gl_Position *= Translation;
-	gl_Position *= Projection;
+	vec4 pos;
+	pos = vec4(vPosition, 1.0);
+	pos *= Scale;
+	pos *= Rotation;
+	pos *= Translation;
+	pos *= Projection;
+	gl_Position = pos;
 }

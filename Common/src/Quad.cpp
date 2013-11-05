@@ -85,7 +85,7 @@ void Quad::draw(Shader* shader)
 	glEnableVertexAttribArray(pos);
 	glEnableVertexAttribArray(texCoord);
 
-	Translation[11] = 1.0f;
+	//Translation[11] = -1.0f;
 
 	shader->use();
 
@@ -97,9 +97,7 @@ void Quad::draw(Shader* shader)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	checkGlError("glBlendFunc");
 
-	_tex->bind(shader);
-
-	
+	_tex->bind(shader);	
 
 	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 5*sizeof(GL_FLOAT), 0);
 	checkGlError("glVertexAttribPointerPos");
@@ -108,7 +106,7 @@ void Quad::draw(Shader* shader)
 	
 	checkGlError("glEnableVertexAttribArray");
 
-	shader->setUniform("Projetion", Projection);
+	shader->setUniform("Projection", Projection);
 	shader->setUniform("Translation", Translation);
 	shader->setUniform("Scale", Scale);
 	shader->setUniform("Rotation", Rotation);
