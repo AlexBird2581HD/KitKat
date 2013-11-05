@@ -15,6 +15,11 @@ namespace KitKat
 		void move(int x, int y);
 		void resize(int width, int height);
 		void rotate(float angle);
+
+		int getX() { return _x; }
+		int getY() { return _y; }
+		int getW() { return _w; }
+		int getH() { return _h; }
 		
 		void setTexture(Texture* texture);
 		static void setProjection(float* matrixArray);

@@ -1,6 +1,7 @@
 #include <Graphics.h>
 #include <Debug.h>
 #include <cstdlib> // malloc and free
+#include <cmath>
 
 using namespace KitKat;
 
@@ -22,8 +23,14 @@ bool Graphics::Init(int width, int height)
 	//quads.push_back(new Quad(100, 100, 100 ,100));
 	//quads.at(0)->setTexture(Texture::loadFile("testi.tga"));
 
-	quad = new Quad(0, 0, 100, 100);
-	quad->setTexture(Texture::loadFile("test1.tga"));
+	quad1 = new Quad(0, 0, 300, 300);
+	quad1->setTexture(Texture::loadFile("ps2.tga"));
+
+	quad2 = new Quad(500, 0, 100, 100);
+	quad2->setTexture(Texture::loadFile("test1.tga"));
+
+	quad3 = new Quad(0, 100, 100, 100);
+	quad3->setTexture(Texture::loadFile("testi.tga"));
 
 	checkGlError("Setup");
 	GLfloat Projection[16] = 
@@ -66,7 +73,17 @@ void Graphics::Draw()
  //   glDrawArrays(GL_TRIANGLES, 0, 3);
  //   checkGlError("glDrawArrays");
 
-	quad->draw(_shader);
+	static int velx = 0, vely = 0;
+
+	static float r = 0;
+	quad2->rotate(r += 0.05f);
+	quad2->resize(std::abs(std::sin(r/3)*200), std::abs(std::sin(r/3)*200));
+
+	quad3->move(quad3->getX() +1, quad3->getY() +2);
+
+	quad1->draw(_shader);
+	quad2->draw(_shader);
+	quad3->draw(_shader);
 }
 
 // Private
@@ -101,7 +118,7 @@ bool Graphics::setupGraphics(int width, int height)
 	glClearDepthf(1);
 #endif
 
-	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
 	checkGlError("glClearColor");
     return true;
 }

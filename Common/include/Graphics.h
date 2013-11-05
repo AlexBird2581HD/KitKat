@@ -28,7 +28,9 @@ namespace KitKat
 		GLuint VBO; // Vertex Buffer Object
 
 		//std::vector<Quad*> quads;
-		Quad* quad;
+		Quad* quad1;
+		Quad* quad2;
+		Quad* quad3;
 
 		bool setupGraphics(int w, int h);
 		void clear();
