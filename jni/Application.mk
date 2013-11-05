@@ -1,5 +1,6 @@
 # Build both ARMv5TE and ARMv7-A machine code.
 
+NDK_TOOLCHAIN_VERSION=clang3.3
 
 #APP_ABI := armeabi
 APP_ABI := armeabi-v7a
