@@ -40,7 +40,7 @@ void checkGlError(const char* op)
 #ifndef NDEBUG
 	for (GLint error = glGetError(); error; error = glGetError())
 	{
-		LOGI("after %s() glError (0x%x)\n", op, error);
+		LOGI("before %s() glError (0x%x)\n", op, error);
 	}
 #endif
 }
