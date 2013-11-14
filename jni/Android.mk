@@ -25,22 +25,10 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../Android/include \
 # Android specific files
 LOCAL_SRC_FILES :=  ../Android/src/gl_code.cpp \
 					../Android/src/FileReader.cpp
-
-# Math library
-LOCAL_SRC_FILES += 	../Common/src/devmath/Vector2.cpp \
-					../Common/src/devmath/Vector3.cpp \
-					../Common/src/devmath/Vector4.cpp \
-					../Common/src/devmath/Point.cpp \
-					../Common/src/devmath/Rectangle.cpp \
-					../Common/src/devmath/Matrix3.cpp \
-					../Common/src/devmath/Matrix4.cpp \
-					../Common/src/devmath/Quaternion.cpp \
-					../Common/src/devmath/Utils.cpp
 					
 # Common engine files
 LOCAL_SRC_FILES += 	../Common/src/Engine.cpp \
 					../Common/src/Debug.cpp \
-					../Common/src/Graphics.cpp \
 					../Common/src/Shader.cpp \
 					../Common/src/Texture.cpp \
 					../Common/src/Quad.cpp
