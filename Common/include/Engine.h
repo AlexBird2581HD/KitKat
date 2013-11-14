@@ -19,9 +19,9 @@ namespace KitKat
 	public:
 		Engine();
 		~Engine();
-		void Update();
-		void Draw();
 		bool Init(int width, int height);
+		void Update();
+		void Draw();		
 	private:
 		int screenWidth, screenHeight;
 

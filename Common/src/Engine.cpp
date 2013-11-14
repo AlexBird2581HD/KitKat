@@ -18,6 +18,40 @@ Engine::~Engine()
 
 
 // Public
+
+bool Engine::Init(int width, int height)
+{
+	screenWidth = width;
+	screenHeight = height;
+
+	if(!setupGraphics(width, height))
+		return false;
+
+	quad1 = new Quad(screenWidth/2, screenHeight/2, 300, 300);
+	quad1->setTexture(Texture::loadFile("testi.tga"));
+
+	quad2 = new Quad(screenWidth/1.2f, screenHeight/2, 100, 100);
+	quad2->setTexture(Texture::loadFile("test1.tga"));
+
+	quad3 = new Quad(200, 200, 100, 100);
+	quad3->setTexture(Texture::loadFile("testi.tga"));
+
+	checkGlError("Setup");
+	GLfloat Projection[16] = 
+	{
+		1.0f/width, 0,	0, 0
+		,0,	1.0f/height,0, 0
+		,0,	0,	1,	0
+		,0,	0,	0,	1
+	};
+
+	glm::mat4 projection = glm::ortho(0.f, (float)screenWidth, 0.f, (float)screenHeight);
+
+	Quad::setProjection(projection);
+
+	return true;
+}
+
 void Engine::Update()
 {
 	static int velx = 5, vely = 5;
@@ -28,10 +62,10 @@ void Engine::Update()
 	quad2->resize(glm::abs(glm::sin(r/100)*100), glm::abs(glm::sin(r/100)*100));
 	quad3->move(quad3->getX() + velx, quad3->getY() + vely);
 
-	if(quad3->getX() < -screenWidth/2 || quad3->getX() > screenWidth/2)
+	if(quad3->getX() < 0 || quad3->getX() > screenWidth)
 		velx = -velx;
 
-	if(quad3->getY() < -screenHeight/2 || quad3->getY() > screenHeight/2)
+	if(quad3->getY() < 0 || quad3->getY() > screenHeight)
 		vely = -vely;
 }
 
@@ -44,39 +78,6 @@ void Engine::Draw()
 	quad3->draw(shader);
 }	
 
-bool Engine::Init(int width, int height)
-{
-	screenWidth = width;
-	screenHeight = height;
-
-	if(!setupGraphics(width, height))
-		return false;
-
-	quad1 = new Quad(0, 0, 300, 300);
-	quad1->setTexture(Texture::loadFile("testi.tga"));
-
-	quad2 = new Quad(500, 0, 100, 100);
-	quad2->setTexture(Texture::loadFile("test1.tga"));
-
-	quad3 = new Quad(0, 100, 100, 100);
-	quad3->setTexture(Texture::loadFile("testi.tga"));
-
-	checkGlError("Setup");
-	GLfloat Projection[16] = 
-	{
-		1.0f/width, 0,	0, 0
-		,0,	1.0f/height,0, 0
-		,0,	0,	1,	0
-		,0,	0,	0,	1
-	};
-
-	glm::mat4 projection = glm::ortho(-screenWidth/2.f, screenWidth/2.f,
-		-screenHeight/2.f, screenHeight/2.f);
-
-	Quad::setProjection(projection);
-
-	return true;
-}
 
 // Private
 
