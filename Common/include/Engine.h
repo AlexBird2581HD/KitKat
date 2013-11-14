@@ -2,7 +2,17 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <Graphics.h>
+#ifdef _WIN32
+#include <OpenGL.h>
+#else
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#endif
+
+#include <Shader.h>
+#include <Quad.h>
+
+#include <vector>
 
 namespace KitKat
 {
@@ -15,7 +25,13 @@ namespace KitKat
 		void Draw();
 		bool Init(int width, int height);
 	private:
-		Graphics* graphics;
+		Shader* _shader;
+
+		Quad* quad1;
+		Quad* quad2;
+		Quad* quad3;
+
+		bool setupGraphics(int width, int height);
 	};
 }
 #endif
