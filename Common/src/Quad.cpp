@@ -100,7 +100,6 @@ void Quad::draw(Shader* shader)
 	glDisableVertexAttribArray(pos);
 	glDisableVertexAttribArray(texCoord);
 
-	//move(_x + 1, _y);
 	glDisable(GL_BLEND);
 }
 

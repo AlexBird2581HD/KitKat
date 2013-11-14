@@ -29,24 +29,12 @@ bool Engine::Init(int width, int height)
 
 	quad1 = new Quad(screenWidth/2, screenHeight/2, 300, 300);
 	quad1->setTexture(Texture::loadFile("testi.tga"));
-
 	quad2 = new Quad(screenWidth/1.2f, screenHeight/2, 100, 100);
 	quad2->setTexture(Texture::loadFile("test1.tga"));
-
 	quad3 = new Quad(200, 200, 100, 100);
 	quad3->setTexture(Texture::loadFile("testi.tga"));
 
-	checkGlError("Setup");
-	GLfloat Projection[16] = 
-	{
-		1.0f/width, 0,	0, 0
-		,0,	1.0f/height,0, 0
-		,0,	0,	1,	0
-		,0,	0,	0,	1
-	};
-
 	glm::mat4 projection = glm::ortho(0.f, (float)screenWidth, 0.f, (float)screenHeight);
-
 	Quad::setProjection(projection);
 
 	return true;
@@ -54,12 +42,11 @@ bool Engine::Init(int width, int height)
 
 void Engine::Update()
 {
-	static int velx = 5, vely = 5;
-
 	static float r = 0;
 	quad2->rotate(r += 5);
-
 	quad2->resize(glm::abs(glm::sin(r/100)*100), glm::abs(glm::sin(r/100)*100));
+
+	static int velx = 5, vely = 5;
 	quad3->move(quad3->getX() + velx, quad3->getY() + vely);
 
 	if(quad3->getX() < 0 || quad3->getX() > screenWidth)
@@ -83,10 +70,6 @@ void Engine::Draw()
 
 bool Engine::setupGraphics(int width, int height)
 {
-	glEnable(GL_TEXTURE_2D);
-	checkGlError("glEnable");
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	checkGlError("glPixelStorei");
 	printGLString("Version", GL_VERSION);
     printGLString("Vendor", GL_VENDOR);
     printGLString("Renderer", GL_RENDERER);
@@ -101,9 +84,6 @@ bool Engine::setupGraphics(int width, int height)
     checkGlError("glViewport");
 
 	shader->use();
-
-	//glGenBuffers(1, &VBO); // Create the VBO
-	//checkGlError("glGenBuffers");
 
 #ifdef _WIN32
 	glClearDepth(1);
