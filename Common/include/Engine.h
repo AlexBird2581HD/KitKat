@@ -12,8 +12,6 @@
 #include <Shader.h>
 #include <Quad.h>
 
-#include <vector>
-
 namespace KitKat
 {
 	class Engine
@@ -25,7 +23,9 @@ namespace KitKat
 		void Draw();
 		bool Init(int width, int height);
 	private:
-		Shader* _shader;
+		int screenWidth, screenHeight;
+
+		Shader* shader;
 
 		Quad* quad1;
 		Quad* quad2;

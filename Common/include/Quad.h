@@ -4,16 +4,18 @@
 #include <Shader.h>
 #include <Texture.h>
 
+#include <glm/glm.hpp>
+
 namespace KitKat
 {
 	class Quad
 	{
 	public:
-		Quad(int x, int y, int w, int h);
+		Quad(int x, int y, float w, float h);
 		~Quad();
 
 		void move(int x, int y);
-		void resize(int width, int height);
+		void resize(float width, float height);
 		void rotate(float angle);
 
 		int getX() { return _x; }
@@ -22,18 +24,20 @@ namespace KitKat
 		int getH() { return _h; }
 		
 		void setTexture(Texture* texture);
-		static void setProjection(float* matrixArray);
-		static float* Projection;
+		static void setProjection(glm::mat4 projection);
 
 		void draw(Shader* shader);
 	private:
-		int _x, _y, _w, _h;
+		int _x, _y;
+		int _w, _h;
+		int _angle;
+
+		static glm::mat4 _projection;
+		glm::mat4 _translation, _rotation, _scale;
 
 		Texture* _tex;
-
 		GLuint _vbo;
 
-		float *Translation, *Rotation, *Scale;
 		float *Data;
 		
 		void genBuffer();

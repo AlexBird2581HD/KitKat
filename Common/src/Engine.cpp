@@ -1,6 +1,9 @@
 #include <Engine.h>
 #include <Debug.h>
 
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
 using namespace KitKat;
 
 Engine::Engine()
@@ -10,38 +13,47 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-	delete _shader;
+	delete shader;
 }
 
 
 // Public
 void Engine::Update()
 {
-	// Add update code here
+	static int velx = 5, vely = 5;
+
+	static float r = 0;
+	quad2->rotate(r += 5);
+
+	quad2->resize(glm::abs(glm::sin(r/100)*100), glm::abs(glm::sin(r/100)*100));
+	quad3->move(quad3->getX() + velx, quad3->getY() + vely);
+
+	if(quad3->getX() < -screenWidth/2 || quad3->getX() > screenWidth/2)
+		velx = -velx;
+
+	if(quad3->getY() < -screenHeight/2 || quad3->getY() > screenHeight/2)
+		vely = -vely;
 }
 
 void Engine::Draw()
 {
-	static int velx = 0, vely = 0;
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	static float r = 0;
-	quad2->rotate(r += 0.05f);
-	quad2->resize(std::abs(std::sin(r/3)*200), std::abs(std::sin(r/3)*200));
-
-	quad3->move(quad3->getX() +1, quad3->getY() +2);
-
-	quad1->draw(_shader);
-	quad2->draw(_shader);
-	quad3->draw(_shader);
+	quad1->draw(shader);
+	quad2->draw(shader);
+	quad3->draw(shader);
 }	
 
 bool Engine::Init(int width, int height)
 {
+	screenWidth = width;
+	screenHeight = height;
+
 	if(!setupGraphics(width, height))
 		return false;
 
 	quad1 = new Quad(0, 0, 300, 300);
-	quad1->setTexture(Texture::loadFile("ps2.tga"));
+	quad1->setTexture(Texture::loadFile("testi.tga"));
 
 	quad2 = new Quad(500, 0, 100, 100);
 	quad2->setTexture(Texture::loadFile("test1.tga"));
@@ -57,24 +69,11 @@ bool Engine::Init(int width, int height)
 		,0,	0,	1,	0
 		,0,	0,	0,	1
 	};
-	//Quad::setProjection(Projection);
-	Quad::Projection = (float*)calloc(16,sizeof(float));
-	Quad::Projection[0] = Projection[0];
-	Quad::Projection[1] = Projection[1];
-	Quad::Projection[2] = Projection[2];
-	Quad::Projection[3] = Projection[3];
-	Quad::Projection[4] = Projection[4];
-	Quad::Projection[5] = Projection[5];
-	Quad::Projection[6] = Projection[6];
-	Quad::Projection[7] = Projection[7];
-	Quad::Projection[8] = Projection[8];
-	Quad::Projection[9] = Projection[9];
-	Quad::Projection[10] = Projection[10];
-	Quad::Projection[11] = Projection[11];
-	Quad::Projection[12] = Projection[12];
-	Quad::Projection[13] = Projection[13];
-	Quad::Projection[14] = Projection[14];
-	Quad::Projection[15] = Projection[15];
+
+	glm::mat4 projection = glm::ortho(-screenWidth/2.f, screenWidth/2.f,
+		-screenHeight/2.f, screenHeight/2.f);
+
+	Quad::setProjection(projection);
 
 	return true;
 }
@@ -94,13 +93,13 @@ bool Engine::setupGraphics(int width, int height)
 
 	LOGI("setupGraphics(%d, %d)", width, height);
 
-	_shader = new Shader("vertexshader.vert", "fragmentshader.frag");
+	shader = new Shader("vertexshader.vert", "fragmentshader.frag");
 	checkGlError("Shader");
 
     glViewport(0, 0, width, height);
     checkGlError("glViewport");
 
-	_shader->use();
+	shader->use();
 
 	//glGenBuffers(1, &VBO); // Create the VBO
 	//checkGlError("glGenBuffers");

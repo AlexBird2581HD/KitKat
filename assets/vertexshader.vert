@@ -11,12 +11,10 @@ varying vec2 texCoord;
 void main() 
 {
 	texCoord = vTexCoord;
+
+	mat4 model = Translation * Rotation * Scale;
+
+	vec4 pos = Projection * model * vec4(vPosition, 1.0);
 	
-	vec4 pos;
-	pos = vec4(vPosition, 1.0);
-	pos *= Scale;
-	pos *= Rotation;
-	pos *= Translation;
-	pos *= Projection;
 	gl_Position = pos;
 }

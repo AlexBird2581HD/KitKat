@@ -1,21 +1,18 @@
 #include <Quad.h>
 #include <Debug.h>
+#include <glm/ext.hpp>
 #include <cstdlib>
 
 using namespace KitKat;
 
-float* Quad::Projection = NULL;
+glm::mat4 Quad::_projection = glm::mat4(1.0f);
 
-Quad::Quad(int x, int y, int w, int h)
+Quad::Quad(int x, int y, float w, float h)
 	: _x(x),
 	  _y(y),
 	  _w(w),
 	  _h(h)
 {
-	Translation = (float*)calloc(16, sizeof(float));
-	Rotation = (float*)calloc(16, sizeof(float));
-	Scale = (float*)calloc(16, sizeof(float));
-
 	glGenBuffers(1, &_vbo);
 	checkGlError("glGenBuffers");
 	genBuffer();
@@ -37,34 +34,20 @@ Quad::~Quad()
 void Quad::move(int x, int y)
 {
 	_x = x; _y = y;
-
-	Translation[0] = 1;
-	Translation[3] = _x;
-	Translation[5] = 1;
-	Translation[7] = _y;
-	Translation[10] = 1;
-	Translation[15] = 1;
+	_translation = glm::translate(glm::vec3(x, y, 0.02f));
 }
 
-void Quad::resize(int width, int height)
+void Quad::resize(float width, float height)
 {
 	_w = width;
 	_h = height;
-
-	Scale[0] = _w;
-	Scale[5] = _h;
-	Scale[10] = 1;
-	Scale[15] = 1;
+	_scale = glm::scale(glm::vec3(width, height, 0));
 }
 
 void Quad::rotate(float angle)
 {
-	Rotation[0] = std::cos(-angle);
-	Rotation[1] = -std::sin(-angle);
-	Rotation[4] = std::sin(-angle);
-	Rotation[5] = std::cos(-angle);
-	Rotation[10] = 1;
-	Rotation[15] = 1;
+	_angle = angle;
+	_rotation = glm::rotate(angle, glm::vec3(0, 0, 1));
 }
 
 void Quad::setTexture(Texture* texture)
@@ -72,9 +55,9 @@ void Quad::setTexture(Texture* texture)
 	_tex = texture;
 }
 
-void Quad::setProjection(float* matrixArray)
+void Quad::setProjection(glm::mat4 projection)
 {
-	Quad::Projection = (float*)malloc(sizeof(float)*16);
+	Quad::_projection = projection;
 }
 
 void Quad::draw(Shader* shader)
@@ -84,8 +67,6 @@ void Quad::draw(Shader* shader)
 	texCoord = shader->getAttribLocation("vTexCoord");	
 	glEnableVertexAttribArray(pos);
 	glEnableVertexAttribArray(texCoord);
-
-	//Translation[11] = -1.0f;
 
 	shader->use();
 
@@ -106,10 +87,10 @@ void Quad::draw(Shader* shader)
 	
 	checkGlError("glEnableVertexAttribArray");
 
-	shader->setUniform("Projection", Projection);
-	shader->setUniform("Translation", Translation);
-	shader->setUniform("Scale", Scale);
-	shader->setUniform("Rotation", Rotation);
+	shader->setUniform("Projection", _projection);
+	shader->setUniform("Translation", _translation);
+	shader->setUniform("Rotation", _rotation);
+	shader->setUniform("Scale", _scale);
 
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	checkGlError("glBindBuffer");

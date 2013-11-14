@@ -20,17 +20,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\Common\src\Debug.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Matrix3.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Matrix4.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Point.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Quaternion.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Rectangle.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Utils.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Vector2.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Vector3.cpp" />
-    <ClCompile Include="..\Common\src\devmath\Vector4.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
-    <ClCompile Include="..\Common\src\Graphics.cpp" />
     <ClCompile Include="..\Common\src\Quad.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
     <ClCompile Include="..\Common\src\Texture.cpp" />
@@ -43,7 +33,6 @@
     <ClInclude Include="..\Android\include\FileReader.h" />
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
-    <ClInclude Include="..\Common\include\Graphics.h" />
     <ClInclude Include="..\Common\include\Quad.h" />
     <ClInclude Include="..\Common\include\Shader.h" />
     <ClInclude Include="..\Common\include\Texture.h" />

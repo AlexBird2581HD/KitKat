@@ -8,7 +8,7 @@
 #include <GLES2/gl2ext.h>
 #endif
 
-#include <devmath/Matrix4.h>
+#include <glm/glm.hpp>
 
 #include <string>
 
@@ -24,12 +24,10 @@ namespace KitKat
 
 		GLint getAttribLocation(const std::string& name);
 		GLint getUniformLocation(const std::string& name);
-		//void setUniform(const std::string& name, devmath::Matrix4 matrix);
-		void setUniform(const std::string& name, float* matrixArray); // Well matrix-ish
-
+		void setUniform(const std::string& name, glm::mat4 matrix);
+		//void setUniform(const std::string& name, float* matrixArray); // Well matrix-ish
 
 		void use();
-
 	private:
 		GLuint _program;
 		GLuint _vertexShader, _fragmentShader;
