@@ -63,6 +63,12 @@
     <ClCompile Include="..\Common\src\Quad.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\src\IndexBuffer.cpp">
+      <Filter>Common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\src\VertexArray.cpp">
+      <Filter>Common\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -90,6 +96,12 @@
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\Quad.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\IndexBuffer.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\VertexArray.h">
       <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>

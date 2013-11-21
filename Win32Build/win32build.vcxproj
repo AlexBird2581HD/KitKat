@@ -21,9 +21,11 @@
     </ClCompile>
     <ClCompile Include="..\Common\src\Debug.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
+    <ClCompile Include="..\Common\src\IndexBuffer.cpp" />
     <ClCompile Include="..\Common\src\Quad.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
     <ClCompile Include="..\Common\src\Texture.cpp" />
+    <ClCompile Include="..\Common\src\VertexArray.cpp" />
     <ClCompile Include="..\Windows\src\OpenGL.cpp" />
     <ClCompile Include="..\Windows\src\FileReader.cpp" />
     <ClCompile Include="..\Windows\src\Window.cpp" />
@@ -33,9 +35,11 @@
     <ClInclude Include="..\Android\include\FileReader.h" />
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
+    <ClInclude Include="..\Common\include\IndexBuffer.h" />
     <ClInclude Include="..\Common\include\Quad.h" />
     <ClInclude Include="..\Common\include\Shader.h" />
     <ClInclude Include="..\Common\include\Texture.h" />
+    <ClInclude Include="..\Common\include\VertexArray.h" />
     <ClInclude Include="..\Windows\include\FileReader.h" />
     <ClInclude Include="..\Windows\include\Win32toAndroid.h" />
     <ClInclude Include="..\Windows\include\Window.h" />
