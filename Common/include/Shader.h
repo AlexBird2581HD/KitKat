@@ -22,9 +22,9 @@ namespace KitKat
 
 		GLuint program();
 
-		GLint getAttribLocation(const std::string& name);
-		GLint getUniformLocation(const std::string& name);
-		void setUniform(const std::string& name, glm::mat4 matrix);
+		GLint getAttribLocation(const std::string& name) const;
+		GLint getUniformLocation(const std::string& name) const;
+		void setUniform(const std::string& name, glm::mat4 matrix) const;
 
 		void use();
 	private:
