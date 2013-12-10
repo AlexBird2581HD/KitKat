@@ -75,6 +75,12 @@
     <ClCompile Include="..\Common\src\SpriteBatch.cpp">
       <Filter>Common\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Android\src\Input_android.cpp">
+      <Filter>Android\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\src\Input_win32.cpp">
+      <Filter>Windows\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -114,6 +120,9 @@
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\SpriteBatch.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\Input.h">
       <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>

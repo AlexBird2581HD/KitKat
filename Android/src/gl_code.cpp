@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 #include <Engine.h>
 #include <Debug.h>
@@ -31,9 +32,28 @@ using namespace KitKat;
 
 Engine* engine = new Engine();
 
+inline long TimeDifference(const struct timespec& last, const struct timespec& current)
+{
+    // Note: There are 1000000000 nanoseconds in each second
+    if (current.tv_sec > last.tv_sec)
+        return (1000000000 - last.tv_nsec) + current.tv_nsec;
+    else
+        return current.tv_nsec - last.tv_nsec;
+}
+
+float deltaTime = 0.0f;
+static struct timespec lastTime;
+
 void renderFrame() {
-	engine->Update();
+	engine->Update(deltaTime);
 	engine->Draw();
+
+	struct timespec currTime;
+	clock_gettime(CLOCK_MONOTONIC, &currTime);
+
+	// TimeDifference returns nanoseconds
+	deltaTime = TimeDifference(lastTime, currTime) / 1e9;
+	lastTime = currTime;
 }
 
 extern "C" {
@@ -47,6 +67,7 @@ JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_init(JNIEnv * env, jobjec
 {
 	//enter native
     engine->Init(width, height);
+	clock_gettime(CLOCK_MONOTONIC, &lastTime);
 }
 
 JNIEXPORT void JNICALL Java_com_android_KaNot_KaNotLib_step(JNIEnv * env, jobject obj)

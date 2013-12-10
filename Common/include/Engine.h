@@ -20,7 +20,7 @@ namespace KitKat
 		Engine();
 		~Engine();
 		bool Init(int width, int height);
-		void Update();
+		void Update(float dt);
 		void Draw();		
 	private:
 		int screenWidth, screenHeight;

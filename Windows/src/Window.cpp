@@ -2,6 +2,7 @@
 #include <Engine.h>
 #include <string>
 #include <OpenGL.h>
+
 #pragma comment(lib, "opengl32.lib")
 
 HWND Window::handle;
@@ -98,24 +99,34 @@ Window::Window(HINSTANCE instance,const char* windowName,int width,int height)
 	MSG msg ={};
 	KitKat::Engine* engine = new KitKat::Engine();
 	engine->Init(width, height);
+
+
+	float deltaTime = 0.0f;
+	long prevTime = GetTickCount(); // Return milliseconds
+
 	// Main message loop:
 	while(msg.message != WM_QUIT)
 	{
 		
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		//if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) == TRUE)
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 
 		}
-		else // We've processed all pending Win32 messages, and can now do a rendering update.
-		{
+		//else // We've processed all pending Win32 messages, and can now do a rendering update.
+		//{
 
 			
 		
-		}
-		engine->Update();
+		//}
+		engine->Update(deltaTime);
 		engine->Draw();
+		long currTime = GetTickCount();
+		deltaTime = (float)(currTime - prevTime) / 1000.f;
+		prevTime = currTime;
+
 		SwapBuffers(Window::hdc); // Swaps display buffers
 	}
 	delete engine;
@@ -128,6 +139,10 @@ LRESULT CALLBACK Window::wEventsProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 	{
 		case WM_DESTROY:
 			PostQuitMessage(0);
+			break;
+		case WM_MOUSEMOVE:
+			break;
+		case WM_LBUTTONDOWN:
 			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);

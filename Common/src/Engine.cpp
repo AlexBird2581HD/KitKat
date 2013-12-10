@@ -40,8 +40,10 @@ bool Engine::Init(int width, int height)
 	return true;
 }
 
-void Engine::Update()
+void Engine::Update(float dt)
 {
+	LOGI("deltaTime: %f\n", dt);
+
 	static float r = 0;
 	quad2->rotate(r += 5);
 	quad2->resize(glm::abs(glm::sin(r/100)*100), glm::abs(glm::sin(r/100)*100));
