@@ -11,16 +11,16 @@ namespace KitKat
 		Input();
 		~Input();
 
-		void processPosition(int x, int y);
-		void processClick(bool click);
+		static void processPosition(int x, int y);
+		static void processClick(bool click);
 
-		glm::vec2 getPosition();
-		bool isClick();
+		static glm::vec2 getPosition();
+		static bool isClick();
 
 	private:
 
-		bool _click;
-		glm::vec2 _inputPos;
+		static bool _click;
+		static glm::vec2 _inputPos;
 	};
 }
 

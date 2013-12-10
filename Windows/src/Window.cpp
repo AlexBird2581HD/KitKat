@@ -144,6 +144,10 @@ LRESULT CALLBACK Window::wEventsProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			break;
 		case WM_LBUTTONDOWN:
 			break;
+		case WM_RBUTTONDOWN:
+			break;
+		case WM_MBUTTONDOWN:
+			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
