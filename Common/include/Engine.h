@@ -2,6 +2,8 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include <vector>
+
 #ifdef _WIN32
 #include <OpenGL.h>
 #else
@@ -10,7 +12,7 @@
 #endif
 
 #include <Shader.h>
-#include <Quad.h>
+#include <GameObject.h>
 
 namespace KitKat
 {
@@ -27,11 +29,16 @@ namespace KitKat
 
 		Shader* shader;
 
-		Quad* quad1;
-		Quad* quad2;
-		Quad* quad3;
+		std::vector<GameObject*> enemies;
+		std::vector<GameObject*> bullets;
+		GameObject* player;
 
 		bool setupGraphics(int width, int height);
+
+		Texture* enemyText;
+		Texture* bulletText;
+
+		void collisionCheck();
 	};
 }
 #endif

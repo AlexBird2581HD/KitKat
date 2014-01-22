@@ -81,6 +81,9 @@
     <ClCompile Include="..\Windows\src\Input_win32.cpp">
       <Filter>Windows\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\src\GameObject.cpp">
+      <Filter>Common\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Windows\include\Win32toAndroid.h">
@@ -123,6 +126,9 @@
       <Filter>Common\include</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\include\Input.h">
+      <Filter>Common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\include\GameObject.h">
       <Filter>Common\include</Filter>
     </ClInclude>
   </ItemGroup>

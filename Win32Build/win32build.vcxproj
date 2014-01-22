@@ -24,6 +24,7 @@
     </ClCompile>
     <ClCompile Include="..\Common\src\Debug.cpp" />
     <ClCompile Include="..\Common\src\Engine.cpp" />
+    <ClCompile Include="..\Common\src\GameObject.cpp" />
     <ClCompile Include="..\Common\src\IndexBuffer.cpp" />
     <ClCompile Include="..\Common\src\Quad.cpp" />
     <ClCompile Include="..\Common\src\Shader.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="..\Android\include\FileReader.h" />
     <ClInclude Include="..\Common\include\Debug.h" />
     <ClInclude Include="..\Common\include\Engine.h" />
+    <ClInclude Include="..\Common\include\GameObject.h" />
     <ClInclude Include="..\Common\include\IndexBuffer.h" />
     <ClInclude Include="..\Common\include\Input.h" />
     <ClInclude Include="..\Common\include\Quad.h" />

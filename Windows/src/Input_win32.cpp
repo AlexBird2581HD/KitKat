@@ -2,7 +2,7 @@
 
 using namespace KitKat;
 
-bool Input::_click;
+bool Input::_click = false;
 glm::vec2 Input::_inputPos;
 
 Input::Input(){}

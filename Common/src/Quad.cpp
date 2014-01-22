@@ -7,11 +7,17 @@ using namespace KitKat;
 
 glm::mat4 Quad::_projection = glm::mat4(1.0f);
 
-Quad::Quad(int x, int y, float w, float h)
-	: _x(x),
-	  _y(y),
-	  _w(w),
-	  _h(h)
+Quad::Quad()
+{
+	glGenBuffers(1, &_vbo);
+	checkGlError("glGenBuffers");
+	genBuffer();
+	move(0, 0);
+	resize(0, 0);
+	rotate(0);
+}
+
+Quad::Quad(float x, float y, float w, float h)
 {
 	glGenBuffers(1, &_vbo);
 	checkGlError("glGenBuffers");
@@ -31,16 +37,16 @@ Quad::~Quad()
 // Public
 
 
-void Quad::move(int x, int y)
+void Quad::move(float x, float y)
 {
-	_x = x; _y = y;
+	pos.x = x; pos.y = y;
 	_translation = glm::translate(glm::vec3(x, y, 0.02f));
 }
 
 void Quad::resize(float width, float height)
 {
-	_w = width;
-	_h = height;
+	size.x = width;
+	size.y = height;
 	_scale = glm::scale(glm::vec3(width, height, 0));
 }
 

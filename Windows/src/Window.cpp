@@ -1,7 +1,10 @@
+#include <Windowsx.h>
+
 #include <Window.h>
 #include <Engine.h>
 #include <string>
 #include <OpenGL.h>
+#include <Input.h>
 
 #pragma comment(lib, "opengl32.lib")
 
@@ -141,12 +144,17 @@ LRESULT CALLBACK Window::wEventsProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			PostQuitMessage(0);
 			break;
 		case WM_MOUSEMOVE:
+			RECT desktop;
+			GetWindowRect(GetDesktopWindow(), &desktop);
+			KitKat::Input::processPosition(
+				GET_X_LPARAM(lParam),
+				desktop.bottom - GET_Y_LPARAM(lParam));
 			break;
 		case WM_LBUTTONDOWN:
+			KitKat::Input::processClick(true);
 			break;
-		case WM_RBUTTONDOWN:
-			break;
-		case WM_MBUTTONDOWN:
+		case WM_LBUTTONUP:
+			KitKat::Input::processClick(false);
 			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);

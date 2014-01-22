@@ -1,6 +1,8 @@
 #include <Engine.h>
 #include <Debug.h>
 
+#include <Input.h>
+
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
@@ -27,44 +29,59 @@ bool Engine::Init(int width, int height)
 	if(!setupGraphics(width, height))
 		return false;
 
-	quad1 = new Quad(screenWidth/2, screenHeight/2, 300, 300);
-	quad1->setTexture(Texture::loadFile("testi.tga"));
-	quad2 = new Quad(screenWidth/1.2f, screenHeight/2, 100, 100);
-	quad2->setTexture(Texture::loadFile("test1.tga"));
-	quad3 = new Quad(200, 200, 100, 100);
-	quad3->setTexture(Texture::loadFile("testi.tga"));
-
 	glm::mat4 projection = glm::ortho(0.f, (float)screenWidth, 0.f, (float)screenHeight);
 	Quad::setProjection(projection);
+
+	enemyText = Texture::loadFile("enemy.tga");
+	bulletText = Texture::loadFile("bullet.tga");
+
+	player = new GameObject(100, screenHeight/2, 64, 64);
+	player->setTexture(Texture::loadFile("player.tga"));
+	//player->move(100, screenWidth/2);
 
 	return true;
 }
 
 void Engine::Update(float dt)
 {
-	LOGI("deltaTime: %f\n", dt);
+	//LOGI("deltaTime: %f\n", dt);
 
-	static float r = 0;
-	quad2->rotate(r += 5);
-	quad2->resize(glm::abs(glm::sin(r/100)*100), glm::abs(glm::sin(r/100)*100));
+	static float bulletCooldown = 0.1;
+	static float enemyCooldown = 0.3;
 
-	static int velx = 5, vely = 5;
-	quad3->move(quad3->getX() + velx, quad3->getY() + vely);
 
-	if(quad3->getX() < 0 || quad3->getX() > screenWidth)
-		velx = -velx;
+	//player->Update(dt);
 
-	if(quad3->getY() < 0 || quad3->getY() > screenHeight)
-		vely = -vely;
+	player->move(Input::getPosition().x, Input::getPosition().y); 
+
+
+	for(int i = 0; i < enemies.size(); ++i)
+	{
+		enemies.at(i)->Update(dt);
+	}
+	for(int i = 0; i < bullets.size(); ++i)
+	{
+		bullets.at(i)->Update(dt);
+	}
+
+	collisionCheck();
 }
 
 void Engine::Draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	quad1->draw(shader);
-	quad2->draw(shader);
-	quad3->draw(shader);
+	
+	for(int i = 0; i < bullets.size(); ++i)
+	{
+		bullets.at(i)->draw(shader);
+	}
+	for(int i = 0; i < enemies.size(); ++i)
+	{
+		enemies.at(i)->draw(shader);
+	}
+
+	player->draw(shader);
 }	
 
 
@@ -96,4 +113,18 @@ bool Engine::setupGraphics(int width, int height)
 	glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
 	checkGlError("glClearColor");
     return true;
+}
+
+void Engine::collisionCheck()
+{
+	for(int i = 0; i < bullets.size(); ++i)
+	{
+		for(int j = 0; j < enemies.size(); ++j)
+		{
+			//auto bullet = bullets.at(i);
+			//auto enemy = enemies.at(j);
+
+			//if(bullet->getX() > enemy->getX() && bullet->getY() <= enemy->getX())
+		}
+	}
 }

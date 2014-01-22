@@ -11,26 +11,27 @@ namespace KitKat
 	class Quad
 	{
 	public:
-		Quad(int x, int y, float w, float h);
+		Quad();
+		Quad(float x, float y, float w, float h);
 		~Quad();
 
-		void move(int x, int y);
+		void move(float x, float y);
 		void resize(float width, float height);
 		void rotate(float angle);
 
-		int getX() { return _x; }
-		int getY() { return _y; }
-		int getW() { return _w; }
-		int getH() { return _h; }
+		int getX() { return pos.x; }
+		int getY() { return pos.y; }
+		int getW() { return size.x; }
+		int getH() { return size.y; }
 		
 		void setTexture(Texture* texture);
 		static void setProjection(glm::mat4 projection);
 
 		void draw(Shader* shader);
-	private:
-		int _x, _y;
-		int _w, _h;
-		int _angle;
+	protected:
+		glm::vec2 pos;
+		glm::vec2 size;
+		float _angle;
 
 		static glm::mat4 _projection;
 		glm::mat4 _translation, _rotation, _scale;
