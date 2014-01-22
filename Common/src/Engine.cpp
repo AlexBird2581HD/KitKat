@@ -23,6 +23,7 @@ Engine::~Engine()
 
 bool Engine::Init(int width, int height)
 {
+	srand(time(NULL));
 	screenWidth = width;
 	screenHeight = height;
 
@@ -46,14 +47,40 @@ void Engine::Update(float dt)
 {
 	//LOGI("deltaTime: %f\n", dt);
 
-	static float bulletCooldown = 0.1;
-	static float enemyCooldown = 0.3;
+	static float bulletCooldown = 0.1f;
+	static float enemyCooldown = 1.3f;
 
 
 	//player->Update(dt);
 
-	player->move(Input::getPosition().x, Input::getPosition().y); 
+	player->move(150, Input::getPosition().y+32); 
 
+	if(Input::isClick())
+	{
+		bulletCooldown -= dt;
+		if(bulletCooldown <= 0)
+		{
+			bulletCooldown = 0.1f;
+			auto bullet = new GameObject(player->getX(), player->getY(), 16, 16);
+			bullet->setTexture(bulletText);
+			bullet->SetVelocity(glm::vec2(250, 0));
+			bullets.push_back(bullet);
+		}
+	}
+
+	if(enemies.size() < 30)
+	{
+		enemyCooldown -= dt;
+		if (enemyCooldown <= 0)
+		{
+			enemyCooldown = 0.3f;
+			float height = rand()/(float)RAND_MAX * screenHeight;
+			auto enemy = new GameObject(screenWidth, height, 64, 64);
+			enemy->setTexture(enemyText);
+			enemy->SetVelocity(glm::vec2(-100, 0));
+			enemies.push_back(enemy);
+		}
+	}
 
 	for(int i = 0; i < enemies.size(); ++i)
 	{
@@ -119,12 +146,27 @@ void Engine::collisionCheck()
 {
 	for(int i = 0; i < bullets.size(); ++i)
 	{
+		auto bullet = bullets.at(i);
 		for(int j = 0; j < enemies.size(); ++j)
-		{
-			//auto bullet = bullets.at(i);
-			//auto enemy = enemies.at(j);
+		{			
+			auto enemy = enemies.at(j);
 
-			//if(bullet->getX() > enemy->getX() && bullet->getY() <= enemy->getX())
+			if(bullet->getX() > enemy->getX()-32 && 
+				bullet->getY() <= enemy->getY() + 32&&
+				bullet->getY() >= enemy->getY() - 32)
+			{
+				delete enemy;
+				delete bullet;
+				enemies.erase(enemies.begin() + j);
+				bullets.erase(bullets.begin() + i);
+				--i; --j;
+			}
 		}
+		if(bullet->getX() > screenWidth)
+		{
+			delete bullet;
+			bullets.erase(bullets.begin() + i);
+			--i;
+		}		
 	}
 }

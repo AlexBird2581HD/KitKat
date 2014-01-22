@@ -144,11 +144,13 @@ LRESULT CALLBACK Window::wEventsProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			PostQuitMessage(0);
 			break;
 		case WM_MOUSEMOVE:
-			RECT desktop;
+			RECT desktop, window;
 			GetWindowRect(GetDesktopWindow(), &desktop);
+			GetWindowRect(hWnd, &window);
 			KitKat::Input::processPosition(
 				GET_X_LPARAM(lParam),
-				desktop.bottom - GET_Y_LPARAM(lParam));
+				// Y direction needs to be reversed because of origin and take window position into account
+				desktop.bottom - window.bottom + window.top - GET_Y_LPARAM(lParam));
 			break;
 		case WM_LBUTTONDOWN:
 			KitKat::Input::processClick(true);

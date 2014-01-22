@@ -15,8 +15,7 @@ GameObject::~GameObject()
 void GameObject::Update(float dt)
 {
 	pos += velocity * dt;
-	//move(pos.x, pos.y);
-	LOGI("X: %f, Y: %f\n", pos.x, pos.y);
+	move(pos.x, pos.y);
 }
 
 void GameObject::SetVelocity(glm::vec2 vel)

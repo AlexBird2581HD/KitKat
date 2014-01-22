@@ -29,7 +29,7 @@ Quad::Quad(float x, float y, float w, float h)
 
 Quad::~Quad()
 {
-	delete _tex;
+	//delete _tex;
 	free(Data);
 }
 
