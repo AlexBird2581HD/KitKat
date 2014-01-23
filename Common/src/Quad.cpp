@@ -47,7 +47,7 @@ void Quad::resize(float width, float height)
 {
 	size.x = width;
 	size.y = height;
-	_scale = glm::scale(glm::vec3(width, height, 0));
+	_scale = glm::scale(glm::vec3(width, -height, 0));
 }
 
 void Quad::rotate(float angle)
