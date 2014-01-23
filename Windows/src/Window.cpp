@@ -5,6 +5,7 @@
 #include <string>
 #include <OpenGL.h>
 #include <Input.h>
+#include <Debug.h>
 
 #pragma comment(lib, "opengl32.lib")
 
@@ -144,13 +145,16 @@ LRESULT CALLBACK Window::wEventsProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			PostQuitMessage(0);
 			break;
 		case WM_MOUSEMOVE:
+			{
 			RECT desktop, window;
 			GetWindowRect(GetDesktopWindow(), &desktop);
 			GetWindowRect(hWnd, &window);
-			KitKat::Input::processPosition(
-				GET_X_LPARAM(lParam),
-				// Y direction needs to be reversed because of origin and take window position into account
-				desktop.bottom - window.bottom + window.top - GET_Y_LPARAM(lParam));
+
+			int x = GET_X_LPARAM(lParam);
+			int y = GET_Y_LPARAM(lParam);
+
+			KitKat::Input::processPosition(x, y);
+			}
 			break;
 		case WM_LBUTTONDOWN:
 			KitKat::Input::processClick(true);

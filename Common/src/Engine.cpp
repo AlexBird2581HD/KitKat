@@ -30,7 +30,7 @@ bool Engine::Init(int width, int height)
 	if(!setupGraphics(width, height))
 		return false;
 
-	glm::mat4 projection = glm::ortho(0.f, (float)screenWidth, 0.f, (float)screenHeight);
+	glm::mat4 projection = glm::ortho(0.f, (float)screenWidth, (float)screenHeight, 0.f);
 	Quad::setProjection(projection);
 
 	enemyText = Texture::loadFile("enemy.tga");
@@ -48,12 +48,12 @@ void Engine::Update(float dt)
 	//LOGI("deltaTime: %f\n", dt);
 
 	static float bulletCooldown = 0.1f;
-	static float enemyCooldown = 1.3f;
+	static float enemyCooldown = 2.0f;
 
 
 	//player->Update(dt);
 
-	player->move(150, Input::getPosition().y+32); 
+	player->move(150, Input::getPosition().y+32);
 
 	if(Input::isClick())
 	{
@@ -151,7 +151,7 @@ void Engine::collisionCheck()
 		{			
 			auto enemy = enemies.at(j);
 
-			if(bullet->getX() > enemy->getX()-32 && 
+			if(bullet->getX() > enemy->getX() - 32 && 
 				bullet->getY() <= enemy->getY() + 32&&
 				bullet->getY() >= enemy->getY() - 32)
 			{
