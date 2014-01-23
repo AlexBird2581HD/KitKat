@@ -33,11 +33,11 @@ bool Engine::Init(int width, int height)
 	glm::mat4 projection = glm::ortho(0.f, (float)screenWidth, (float)screenHeight, 0.f);
 	Quad::setProjection(projection);
 
-	enemyText = Texture::loadFile("enemy.tga");
-	bulletText = Texture::loadFile("bullet.tga");
+	enemyText = Texture::loadFile("evilonionminion.tga");
+	bulletText = Texture::loadFile("candycaneboom1.tga");
 
 	player = new GameObject(100, screenHeight/2, 64, 64);
-	player->setTexture(Texture::loadFile("player.tga"));
+	player->setTexture(Texture::loadFile("mufficupcake.tga"));
 	//player->move(100, screenWidth/2);
 
 	return true;
